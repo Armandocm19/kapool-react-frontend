@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Establece el tamaño original del elemento */
+.question {
+    transform: scale(1);
+  }
+  
+  /* Define la animación */
+  @keyframes animacion-escala {
+    0% {
+      transform: scale(1); /* El elemento está en su tamaño original */
+    }
+    50% {
+      transform: scale(1.1); /* El elemento se agranda a un tamaño del 150% */
+    }
+    100% {
+      transform: scale(1); /* El elemento vuelve a su tamaño original */
+    }
+  }
+  
+  /* Aplica la animación al elemento */
+  .question {
+    animation: animacion-escala 2s ease-in-out infinite; /* La animación dura 2 segundos y se repite indefinidamente */
+  }

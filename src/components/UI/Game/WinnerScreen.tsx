@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { type ILeaderboard } from "../../../interfaces/ILeaderboard";
 import { fireworks } from "../../../utils";
+import "../../../styles/loader.css";
 
 interface IProps {
   leaderboard: ILeaderboard[];

@@ -33,11 +33,17 @@ export const createGame = async (game: IGame) => {
 
 export const getGamesByOwner = async (idOwner: string) => {
   try {
-    const url = `${baseUrl}/getGames/${idOwner}`
-    const game = await axios.get(url)
-    return game.data
+    const resp = await fetchSinToken(`getGames/${idOwner}`)
+    const body = await resp.json()
+    if (body.ok) {
+      return {
+        ok: true,
+        games: body.games
+      }
+    }
   } catch (error) {
     console.error('Error al almacenar datos: ', error)
+    return { ok: false }
   }
 }
 

@@ -17,7 +17,7 @@ export const CreatePage = () => {
           questionNumberState > 1 && (
             <Boton
               onClick={onSavedGame}
-              className='absolute top-0 right-0 w-64 font-mono scale bg-yellow-600 p-2 text-white font-bold rounded mt-4 mr-6 ease-in duration-100 hover:scale-110'
+              className='absolute top-0 right-0 w-64 font-bold tracking-tight scale bg-yellow-600 p-2 text-white rounded mt-4 mr-6 ease-in duration-100 hover:scale-110'
               message='Guardar juego'
             />
           )

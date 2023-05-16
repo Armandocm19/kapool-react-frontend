@@ -24,15 +24,15 @@ export function Players () {
       {
         playersList.length !== 0
           ? (
-              <div>
-                <h1 className="text-5xl font-mono text-white">Lista de jugadores</h1>
-                <div className="grid grid-rows-2 grid-cols-5 place-content-center gap-10 mt-10">
+              <div className='w-screen flex flex-col items-center justify-center'>
+                <h1 className="text-5xl font-bold tracking-tigh text-white">Lista de jugadores</h1>
+                <div className="max-w-[700px] grid grid-rows-2 grid-cols-3 place-content-center gap-10 mt-10">
                 {
                   playersList.map(player => (
                     <div key={player.socketId} >
                           <div className="flex flex-col justify-center items-center">
                               <UserIcon />
-                              <p className='text-xl font-mono text-white'>{player.id}</p>
+                              <p className='text-xl font-bold tracking-tigh text-white text-center'>{player.id}</p>
                           </div>
                         </div>
                   )
@@ -43,7 +43,7 @@ export function Players () {
             )
           : (
             <>
-              <h1 className='text-5xl font-mono text-white'>Esperando jugadores...</h1>
+              <h1 className='text-5xl font-bold tracking-tigh text-white'>Esperando jugadores...</h1>
               <div className="mt-10">
                 <Ring
                   size={40}

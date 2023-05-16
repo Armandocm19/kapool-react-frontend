@@ -13,10 +13,14 @@ export const usePlayerGame = () => {
   const [totalScore, setTotalScore] = useState(0)
   const [correctAnswer, setCorrectAnswer] = useState(false)
   const [isQuestionAnswered, setIsQuestionAnswered] = useState(false)
+  const [questionGameLength, setQuestionGameLength] = useState(0)
+  const [finishScreen, setFinishScreen] = useState(false)
 
   const sendAnswer = (answerIndex: number) => {
     setIsQuestionScreen(false)
     setIsResultScreen(true)
+
+    if (questionGameLength === questionData?.question.questionNumber) setFinishScreen(true)
 
     let currentAnswer
     if (questionData?.answer) currentAnswer = Object.values(questionData?.answer)[answerIndex]
@@ -40,10 +44,11 @@ export const usePlayerGame = () => {
       setIsResultScreen(false)
       startPreviewCountdown(5)
     })
-    socket.on('host-start-question-timer', (time: number, question: any) => {
+    socket.on('host-start-question-timer', (time: number, question: any, questionGameLength: number) => {
       setCorrectAnswer(false)
       setQuestionData(question)
       startQuestionCountdown(time)
+      setQuestionGameLength(questionGameLength)
     })
   }, [socket])
 
@@ -82,7 +87,7 @@ export const usePlayerGame = () => {
 
   const nextPage = () => {
     setTimeout(() => {
-      startPreviewCountdown(5)
+      if (!finishScreen) startPreviewCountdown(5)
     }, 5000)
   }
 
@@ -90,6 +95,7 @@ export const usePlayerGame = () => {
     // variables
     isQuestionScreen,
     isPreviewScreen,
+    finishScreen,
     isResultScreen,
     correctAnswer,
     isQuestionAnswered,

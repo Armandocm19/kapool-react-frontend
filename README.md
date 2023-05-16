@@ -13,7 +13,7 @@ Este proyecto es un clon de Kahoot, una plataforma de aprendizaje basada en jueg
 - Crea y juega cuestionarios interactivos.
 - Puntuaciones en tiempo real y clasificaciones.
 - Soporte para múltiples jugadores y salas de juego.
-- Diseño responsivo y atractivo con Tailwind CSS.
+- Diseño atractivo con Tailwind CSS.
 - Fácil personalización y extensibilidad.
 
 ## Requisitos previos

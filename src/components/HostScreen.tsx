@@ -12,12 +12,13 @@ export const HostScreen = () => {
   } = useHostGame()
 
   return (
-      <section className="w-screen flex justify-center flex-col items-center pt-20 pb-20">
+      <>
+      <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-20 pb-20'}`}>
         {!isGameStarted && (
             <>
               <Boton
                 onClick={startGame}
-                className='absolute top-0 right-0 w-64 font-mono scale bg-yellow-600 p-2 text-white font-bold rounded mt-4 mr-6 ease-in duration-100 hover:scale-110'
+                className='absolute top-0 right-0 w-64 scale bg-[#EF8354] p-2 text-[#242634] font-bold tracking-tigh rounded mt-6 mr-8 ease-in duration-100 hover:scale-110'
                 message='Iniciar juego'
               />
               <Players />
@@ -25,14 +26,14 @@ export const HostScreen = () => {
         )}
         {isPreviewScreen && (
           <div className="flex flex-col items-center w-full">
-            <h1 className='text-white font-mono text-8xl'>{timer === 0 ? 5 : timer}</h1>
+            <h1 className='text-white font-bold text-8xl'>{timer === 0 ? 5 : timer}</h1>
           </div>
         )}
         {isQuestionScreen && (
           <>
-            <h1 className='text-white font-mono text-4xl'>{ currentQuestion?.question }</h1>
+            <h1 className='text-white font-bold tracking-tight text-4xl'>{ currentQuestion?.question }</h1>
             <div className='w-20 border border-white h-20 mt-10 rounded-full flex items-center justify-center'>
-              <h1 className='text-white font-mono text-4xl'>{timer}</h1>
+              <h1 className='text-white font-bold text-4xl'>{timer}</h1>
             </div>
             <div className="w-9/12 grid grid-cols-2 gap-10 mt-7">
               <ListAnswers host currentAnswerProps={currentAnswer} />
@@ -45,10 +46,11 @@ export const HostScreen = () => {
           </>
         )}
         {winnerScreen && (
-          <>
-            <WinnerScreen leaderboard={leaderboard} />
-          </>
+        <>
+          <WinnerScreen leaderboard={leaderboard} />
+        </>
         )}
       </section>
+      </>
   )
 }

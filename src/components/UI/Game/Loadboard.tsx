@@ -16,19 +16,19 @@ export const Loadboard = ({ resultPlayers }: Props) => {
               players.length !== 0
                 ? (
                     <>
-                     <h1 className="text-5xl font-mono text-white">Puntuación actual</h1>
-                    <table className="w-8/12 text-center text-sm font-light mt-10">
-                        <thead className="border-b font-medium dark:border-neutral-500">
-                          <tr className="border-b font-medium dark:border-neutral-500">
-                              <th scope="col" className="px-6 py-4 text-white">Posición</th>
-                              <th scope="col" className="px-6 py-4 text-white">Jugador</th>
-                              <th scope="col" className="px-6 py-4 text-white">Puntuación</th>
+                     <h1 className="text-5xl font-bold tracking-tight text-white">Puntuación actual</h1>
+                    <table className="w-8/12 text-center text-sm font-light mt-10 rounded-lg overflow-hidden">
+                        <thead className="border-b font-medium bg-[#4F5D75]/30">
+                          <tr className="border-b font-medium border-[#20232F]">
+                              <th scope="col" className="px-6 py-4 text-white font-bold tracking-tight">Posición</th>
+                              <th scope="col" className="px-6 py-4 text-white font-bold tracking-tight">Jugador</th>
+                              <th scope="col" className="px-6 py-4 text-white font-bold tracking-tight">Puntuación</th>
                           </tr>
                         </thead>
                       <tbody className="overflow-y-scroll">
                       {
                         players.map((game, index) => (
-                            <tr key={game.socketId} className="border-b border-neutral-700 bg-neutral-800 text-neutral-50 dark:border-neutral-600 dark:bg-neutral-700">
+                            <tr key={game.socketId} className="border-b border-[#20232F] text-neutral-50 bg-[#4F5D75]/30">
                                 <td className="whitespace-nowrap px-6 py-2 font-medium">{ index + 1 }</td>
                                 <td className="whitespace-nowrap px-6 py-2">{ game.player }</td>
                                 <td className="whitespace-nowrap px-6 py-2">{ `${game.score} PTS` }</td>
@@ -41,7 +41,7 @@ export const Loadboard = ({ resultPlayers }: Props) => {
                   )
                 : (
                     <>
-                      <h1 className='text-5xl font-mono text-white'>Esperando resultados...</h1>
+                      <h1 className='text-5xl font-bold tracking-tight text-white'>Esperando resultados...</h1>
                       <div className="mt-10">
                         <Ring
                           size={40}

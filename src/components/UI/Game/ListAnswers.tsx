@@ -11,7 +11,7 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
         <>
             <Answer
                 className={
-                `flex items-center w-full bg-red-600 
+                `flex items-center w-full bg-red-600 font-bold
                 p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'}`
                 }
                 name='firstButton'
@@ -21,7 +21,7 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               />
               <Answer
                 className={
-                `flex items-center w-full bg-green-600
+                `flex items-center w-full bg-green-600 font-bold
                 p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'}`
                 }
                 name='firstButton'
@@ -31,7 +31,7 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               />
               <Answer
                 className={
-                `flex items-center w-full bg-yellow-600 
+                `flex items-center w-full bg-yellow-600 font-bold
                 p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'}`
                 }
                 name='firstButton'
@@ -41,7 +41,7 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               />
               <Answer
                 className={
-                `flex items-center w-full bg-blue-600 
+                `flex items-center w-full bg-blue-600 font-bold
                 p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'}`
                 }
                 name='firstButton'

@@ -1,6 +1,6 @@
 
 export interface IGame {
-  _id: string
+  _id?: string
   owner: string
   quizId: string
   hostId: string

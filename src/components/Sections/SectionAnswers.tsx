@@ -11,10 +11,10 @@ interface Props {
 export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, checkboxAnswers }: Props) => {
   return (
         <>
-          <h2 className='text-white text-2xl mt-8'
+          <h2 className='text-white text-2xl mt-8 font-bold tracking-tight'
           >Coloca tus 4 posibles respuestas
           </h2>
-          <p className='text-zinc-500'>La respuesta correcta debe ser marcada en la casilla</p>
+          <p className='text-zinc-500 font-bold tracking-tight'>La respuesta correcta debe ser marcada en la casilla</p>
 
           <div className="w-7/12 grid grid-cols-2 gap-7 mt-7">
 
@@ -26,7 +26,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer1
                 }
-                className='outline-0 shadow w-full bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
+                className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
               />
               <Input
@@ -37,7 +37,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer1
                 }
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 font-bold tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
 
@@ -49,7 +49,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer2
                 }
-                className='outline-0 shadow w-full bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
+                className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
               />
               <Input
@@ -60,7 +60,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer2
                 }
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 font-bold tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
 
@@ -72,7 +72,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer3
                 }
-                className='outline-0 shadow w-full bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
+                className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
               />
 
@@ -96,7 +96,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer4
                 }
-                className='outline-0 shadow w-full bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
+                className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
               />
               <Input

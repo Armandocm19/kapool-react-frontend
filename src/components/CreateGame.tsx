@@ -44,7 +44,7 @@ export const CreatePage = () => {
           <div className='flex gap-5 mt-7'>
             <div onClick={onNextQuestion}>
               <Boton
-                className='w-72 font-mono scale bg-blue-700 p-2 text-white font-bold rounded mt-4 ease-in duration-100 hover:scale-110'
+                className='w-72 scale bg-[#EF8354] text-[#242634] p-2  font-bold rounded mt-4 ease-in duration-100 hover:scale-110'
                 message='Siguiente pregunta'
                 value={+1}
                 />

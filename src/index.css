@@ -52,3 +52,18 @@ body::after{
   top: 420px;
   z-index: -1;
 }
+
+footer{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  padding-bottom: 10px;
+}
+
+footer img{
+  width: 30px;
+}

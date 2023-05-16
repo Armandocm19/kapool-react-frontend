@@ -68,7 +68,7 @@ export const useHostGame = () => {
           answer: quiz?.answers[index]
         }
         startQuestionCountdown(quiz?.questionsGame[index].timeForQuestion ?? 0, index + 1)
-        socket.emit('start-question-timer', quiz?.questionsGame[index].timeForQuestion ?? 0, quizParameters)
+        socket.emit('start-question-timer', quiz?.questionsGame[index].timeForQuestion ?? 0, quizParameters, quiz?.questionsGame.length)
       }
       time--
     }, 1000)

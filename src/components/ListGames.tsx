@@ -8,6 +8,10 @@ import { SocketContext } from '../context/Socket'
 export const ListGames = () => {
   const { initializeSocket, socket } = useContext(SocketContext)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState({
+    isError: false,
+    message: ''
+  })
   const [gamesByOwner, setGamesByOwner] = useState<IGame[]>([])
   const navigate = useNavigate()
 
@@ -16,6 +20,15 @@ export const ListGames = () => {
     if (!idOwner) return
     setIsLoading(true)
     const listGames = await getGamesByOwner(idOwner)
+    if (!listGames) return
+    if (!listGames.ok) {
+      setError({
+        isError: true,
+        message: 'No se pudo obtener la lista de partidas'
+      })
+      setIsLoading(false)
+      return
+    }
     setGamesByOwner(listGames.games)
     setIsLoading(false)
   }
@@ -32,9 +45,18 @@ export const ListGames = () => {
 
   return (
         <div className="w-screen flex justify-center flex-col items-center pt-20 pb-20">
-           {
-            gamesByOwner.length !== 0
-              ? (
+          {
+            isLoading ? (
+              <Ring
+                size={40}
+                lineWeight={5}
+                speed={2}
+                color="white"
+               />
+            )
+              : (
+                  gamesByOwner.length !== 0
+                    ? (
                     <>
                       <h1 className="text-5xl font-bold text-white">Tus partidas creadas</h1>
                       <table className="w-8/12 text-center text-sm font-light mt-10 rounded-lg overflow-hidden">
@@ -73,22 +95,13 @@ export const ListGames = () => {
                         </tbody>
                       </table>
                     </>
-                )
-              : (
-                  isLoading
-                    ? (
-                        <Ring
-                          size={40}
-                          lineWeight={5}
-                          speed={2}
-                          color="white"
-                        />
                       )
                     : (
-                      <h1 className="text-5xl font-mono text-white">No tienes partidas creadas</h1>
+                  <h1 className="text-5xl font-bold tracking-tight text-white">{error.isError ? error.message : 'No tienes partidas creadas'}</h1>
                       )
+
                 )
-           }
+          }
         </div>
   )
 }

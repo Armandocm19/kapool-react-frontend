@@ -24,3 +24,31 @@
   .question {
     animation: animacion-escala 2s ease-in-out infinite; /* La animación dura 2 segundos y se repite indefinidamente */
   }
+
+body {
+  background-color: #0D0F12;
+}
+
+body::before{
+  content: '';
+  background: #EB455F;
+  filter: blur(150px);
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  left: -50px;
+  top: 100px;
+  z-index: -1;
+}
+
+body::after{
+  content: '';
+  background: #4F5D75;
+  filter: blur(150px);
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  right: 350px;
+  top: 420px;
+  z-index: -1;
+}

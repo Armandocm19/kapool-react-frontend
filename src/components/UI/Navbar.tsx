@@ -7,7 +7,7 @@ export const Navbar = () => {
 
   return (
         <nav
-          className='absolute top-4 w-3/4 flex justify-between items-center h-12 bg-[#4F5D75]/20 text-white shadow-sm rounded pl-6 pr-6'
+          className={`absolute top-4 w-3/4 flex ${userName ? 'justify-between' : 'justify-center'} items-center h-12 bg-[#4F5D75]/20 text-white shadow-sm rounded pl-6 pr-6`}
           role='navigation'>
             {
                 userName && (
@@ -19,8 +19,14 @@ export const Navbar = () => {
                 )
             }
             <div className='flex gap-9 justify-center'>
-                <NavLink to='/create' className='scale duration-100 hover:scale-110 font-bold'>Crear partida</NavLink>
-                <NavLink to='/list' className='scale duration-100 hover:scale-110 font-bold'>Lista de partidas creadas</NavLink>
+                {
+                  userName && (
+                    <>
+                      <NavLink to='/create' className='scale duration-100 hover:scale-110 font-bold'>Crear partida</NavLink>
+                      <NavLink to='/list' className='scale duration-100 hover:scale-110 font-bold'>Lista de partidas creadas</NavLink>
+                    </>
+                  )
+                }
             </div>
             {
               userName
@@ -39,9 +45,9 @@ export const Navbar = () => {
                 : (
                 <NavLink
                   to='/login'
-                  className='scale duration-100 hover:scale-110 hover:cursor-pointer font-bold'
+                  className='flex hover:cursor-pointer font-bold tracking-tight'
                 >
-                  Iniciar sección
+                 <span className='scale duration-100 hover:scale-110 underline'>Iniciar sesión</span> &nbsp; para crear una partida
                 </NavLink>
                   )
             }

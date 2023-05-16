@@ -23,7 +23,7 @@ export const createQuiz = async (game: QuizStateInDB) => {
   try {
     const url = `${baseUrl}/createQuiz`
     const newQuiz = await axios.post(url, game)
-    return { newQuiz: newQuiz.data }
+    return { newQuiz: newQuiz.data.quiz }
   } catch (error) {
     console.error('Error al almacenar datos: ', error)
   }

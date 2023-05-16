@@ -6,19 +6,21 @@ export const Navbar = () => {
   const [userName, setUserName] = useState(localStorage.getItem('name'))
 
   return (
-        <nav className='absolute top-4 w-3/4 flex justify-between items-center h-12 bg-zinc-800 text-white shadow-sm font-mono rounded pl-6 pr-6' role='navigation'>
+        <nav
+          className='absolute top-4 w-3/4 flex justify-between items-center h-12 bg-[#4F5D75]/20 text-white shadow-sm rounded pl-6 pr-6'
+          role='navigation'>
             {
                 userName && (
-                  <div className='flex gap-2 items-center'>
+                  <div className='flex gap-2 items-center font-bold'>
                     <FaUserCircle />
                     <p>{userName}</p>
                     <p className='text-xs'>🟢</p>
                   </div>
                 )
             }
-            <div className='flex gap-6 justify-center'>
-                <NavLink to='/create' className='scale duration-100 hover:scale-110'>Crear partida</NavLink>
-                <NavLink to='/list' className='scale duration-100 hover:scale-110'>Lista de partidas creadas</NavLink>
+            <div className='flex gap-9 justify-center'>
+                <NavLink to='/create' className='scale duration-100 hover:scale-110 font-bold'>Crear partida</NavLink>
+                <NavLink to='/list' className='scale duration-100 hover:scale-110 font-bold'>Lista de partidas creadas</NavLink>
             </div>
             {
               userName
@@ -28,7 +30,7 @@ export const Navbar = () => {
                       localStorage.removeItem('name')
                       setUserName('')
                     }}
-                    className='scale duration-100 hover:scale-110 hover:cursor-pointer'
+                    className='scale duration-100 hover:scale-110 hover:cursor-pointer font-bold'
                   >
                     Cerrar sesión
                   </p>
@@ -37,7 +39,7 @@ export const Navbar = () => {
                 : (
                 <NavLink
                   to='/login'
-                  className='scale duration-100 hover:scale-110 hover:cursor-pointer'
+                  className='scale duration-100 hover:scale-110 hover:cursor-pointer font-bold'
                 >
                   Iniciar sección
                 </NavLink>

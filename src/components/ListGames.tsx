@@ -78,16 +78,16 @@ export const ListGames = () => {
                                   <td className="whitespace-nowrap px-6 py-2">{ `${game.playerList?.length}/10` }</td>
                                   <td className="whitespace-nowrap px-6 py-2">{ game.isLive ? 'Activado' : 'Desactivado' }</td>
                                   <td className="whitespace-nowrap px-6 py-2 flex justify-center">
-                                  {/* {
+                                  {
                                       game.isLive
                                         ? (
                                             'En curso...'
                                           )
                                         : (
-                                         <button className="w-full bg-blue-700 text-white font-bold rounded p-2" onClick={async () => { await activeGame(game) }}>Activar</button>
+                                         <button className="w-full bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105" onClick={async () => { await activeGame(game) }}>Activar</button>
                                           )
-                                  } */}
-                                  <button className="w-full bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105" onClick={async () => { await activeGame(game) }}>Activar</button>
+                                  }
+                                  {/* <button className="w-full bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105" onClick={async () => { await activeGame(game) }}>Activar</button> */}
                                   </td>
                               </tr>
                           ))

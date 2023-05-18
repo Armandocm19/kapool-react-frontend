@@ -8,7 +8,7 @@ import { createGame, createQuiz } from '../api'
 import { generateCode } from '../utils'
 
 export const useValues = () => {
-  const { questionNumberState } = useContext(QuizContext)
+  const { questionNumberState, changeNumberQuestion } = useContext(QuizContext)
   const navigate = useNavigate()
 
   const [questionData, setQuestionData] = useState<QuizStateInDB>(INITIAL_STATE)
@@ -27,6 +27,7 @@ export const useValues = () => {
       confirmButtonText: 'Si, guárdalo!'
     }).then((result) => {
       if (result.isConfirmed) {
+        changeNumberQuestion(+1)
         const newQuestions = {
           questionNumber: questionNumberState,
           question: inputsValue.question,

@@ -38,6 +38,11 @@ export const useJoinGame = () => {
     }))
   }
 
+  const resetInputValue = () => {
+    setCodeValue({ code: '', name: '' })
+    setDataFromServer({ code: '', name: '' })
+  }
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!codeValue.name) {
@@ -47,20 +52,22 @@ export const useJoinGame = () => {
           errorValue: true,
           message: 'No se ha encontrado una partida que coincida con el código ingresado'
         })
-        setCodeValue({ code: '', name: '' })
-        return
       }
 
-      if (game.gameBD.hostId !== codeValue.code) {
+      if (game && game.gameBD.hostId !== codeValue.code) {
         setError({
           errorValue: true,
           message: 'No se ha encontrado una partida que coincida con el código ingresado'
         })
-      } else if (!game.gameBD.isLive) {
+        resetInputValue()
+        return
+      } else if (game && !game.gameBD.isLive) {
         setError({
           errorValue: true,
           message: 'Lo siento, el juego no se ha iniciado. Habla con el creador de la partida.'
         })
+        resetInputValue()
+        return
       } else {
         setError({ errorValue: false, message: '' })
       }

@@ -80,7 +80,6 @@ export const useHostGame = () => {
       setTimer(time)
       if (time === 0) {
         clearInterval(interval)
-        console.log(index)
         const questionNumber = (quiz?.questionsGame[index - 1].questionNumber ?? 0) + 1
         const questionArrayLength = quiz?.questionsGame.length
 

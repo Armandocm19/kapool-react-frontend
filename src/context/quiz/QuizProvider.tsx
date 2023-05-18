@@ -29,18 +29,11 @@ export const QuizProvider: FC<Props> = ({ children }) => {
 
   const addQuestion = (question: IQuizQuestions) => {
     const { questionNumberState } = state
-    console.log('estado: ', state.questionsGame[questionNumberState].questions.questionNumber)
-    console.log('actual: ', question.questions.questionNumber)
     if (state.questionsGame.find(item => item.questions.questionNumber === question.questions.questionNumber) != null) {
       dispatch({ type: '[Game] - Edit questions and answers', payload: question })
     } else {
       dispatch({ type: '[Game] - Add questions and answers', payload: question })
     }
-    // if (questionNumberState === state.questionsGame[questionNumberState].questions.questionNumber) {
-    //   dispatch({ type: '[Game] - Edit questions and answers', payload: question })
-    // } else {
-    //   dispatch({ type: '[Game] - Add questions and answers', payload: question })
-    // }
   }
 
   const changeNumberQuestion = (value: number) => {

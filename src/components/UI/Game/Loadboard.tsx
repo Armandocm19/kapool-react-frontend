@@ -31,7 +31,7 @@ export const Loadboard = ({ resultPlayers }: Props) => {
                             <tr key={game.socketId} className="border-b border-[#20232F] text-neutral-50 bg-[#4F5D75]/30">
                                 <td className="whitespace-nowrap px-6 py-2 font-medium">{ index + 1 }</td>
                                 <td className="whitespace-nowrap px-6 py-2">{ game.player }</td>
-                                <td className="whitespace-nowrap px-6 py-2">{ `${game.score} PTS` }</td>
+                                <td className="whitespace-nowrap px-6 py-2">{ `${game.score ?? 0} PTS` }</td>
                             </tr>
                         ))
                       }

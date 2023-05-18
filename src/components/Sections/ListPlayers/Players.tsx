@@ -24,22 +24,22 @@ export function Players () {
       {
         playersList.length !== 0
           ? (
-              <div className='w-screen flex flex-col items-center justify-center'>
-                <h1 className="text-5xl font-bold tracking-tigh text-white">Lista de jugadores</h1>
-                <div className="max-w-[700px] grid grid-rows-2 grid-cols-3 place-content-center gap-10 mt-10">
-                {
-                  playersList.map(player => (
-                    <div key={player.socketId} >
-                          <div className="flex flex-col justify-center items-center">
-                              <UserIcon />
-                              <p className='text-xl font-bold tracking-tigh text-white text-center'>{player.id}</p>
-                          </div>
-                        </div>
-                  )
-                  )
-                }
-                </div>
-              </div>
+        <div className='w-screen flex flex-col items-center justify-center'>
+          <h1 className="text-5xl font-bold tracking-tigh text-white">Lista de jugadores</h1>
+          <div className="max-w-[700px] grid grid-rows-2 grid-cols-3 place-content-center gap-10 mt-10">
+          {
+            playersList.map(player => (
+              <div key={player.socketId} >
+                    <div className="flex flex-col justify-center items-center">
+                        <UserIcon />
+                        <p className='text-xl font-bold tracking-tigh text-white text-center'>{player.id}</p>
+                    </div>
+                  </div>
+            )
+            )
+          }
+          </div>
+        </div>
             )
           : (
             <>

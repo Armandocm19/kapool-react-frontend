@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 export const WelcomeTitle = () => {
   return (
     <div className="flex items-center flex-col">
-        <h1 className="text-5xl font-bold text-white tracking-wide">Te damos la bienvenida a</h1>
+        <h1 className="text-5xl font-bold text-white tracking-wide md:text-3xl">Te damos la bienvenida a</h1>
         <h2 className="uppercase text-9xl font-extrabold tracking-wide">
           <span className="text-[#1F51FF]">K</span>
           <span className='text-white'>a</span>

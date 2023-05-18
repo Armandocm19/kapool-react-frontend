@@ -12,7 +12,6 @@ export const HostScreen = () => {
   } = useHostGame()
 
   return (
-      <>
       <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-20 pb-20'}`}>
         {!isGameStarted && (
             <>
@@ -51,6 +50,5 @@ export const HostScreen = () => {
         </>
         )}
       </section>
-      </>
   )
 }

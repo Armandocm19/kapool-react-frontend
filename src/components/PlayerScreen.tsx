@@ -19,10 +19,10 @@ export const PlayerScreen = () => {
               )}
               {!finishScreen && isQuestionScreen && (
                   <>
-                    <div className="w-full grid grid-cols-2 gap-10 mt-7">
+                    <div className="w-full grid grid-cols-2 gap-10 mt-7 md:gap-5">
                       <Answer
                           className={
-                          'flex items-center w-full p-32 bg-red-600 justify-between rounded cursor-pointer scale duration-100 hover:scale-105'
+                          'flex items-center w-full p-32 bg-red-600 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
                           }
                           name='firstButton'
                           onClick={() => { sendAnswer(0) }}
@@ -30,7 +30,7 @@ export const PlayerScreen = () => {
                       />
                       <Answer
                           className={
-                          'flex items-center w-full bg-green-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105'
+                          'flex items-center w-full bg-green-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
                           }
                           name='secondButton'
                           onClick={() => { sendAnswer(1) }}
@@ -38,7 +38,7 @@ export const PlayerScreen = () => {
                       />
                       <Answer
                           className={
-                          'flex items-center w-full bg-yellow-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105'
+                          'flex items-center w-full bg-yellow-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
                           }
                           name='thirdButton'
                           onClick={() => { sendAnswer(2) }}
@@ -46,7 +46,7 @@ export const PlayerScreen = () => {
                       />
                       <Answer
                           className={
-                          'flex items-center w-full bg-blue-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105'
+                          'flex items-center w-full bg-blue-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
                           }
                           name='fourthButton'
                           onClick={() => { sendAnswer(3) }}

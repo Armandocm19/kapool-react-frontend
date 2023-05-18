@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <SocketProvider>
       <QuizProvider>
-        <main className="grid h-screen place-items-center w-full">
+        <main className="relative grid h-screen place-items-center w-full">
           <RouterProvider router={router} />
         </main>
       </QuizProvider>

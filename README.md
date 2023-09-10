@@ -30,10 +30,13 @@ Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 
 ```shell
 git clone [https://github.com/Armandocm19/kapool-react-frontend.git](https://github.com/Armandocm19/kapool-react-frontend)
-
+```
 2. Deberás clonar también el código del backend
 
 ```shell
 git clone [https://github.com/Armandocm19/kapool-backend.git](https://github.com/Armandocm19/kapool-backend)
-
-3. Luego de haber clonado el backend deberás ejecutar el comando `npm start`
+```
+3. Luego de haber clonado el backend deberás ejecutar el comando 
+```shell
+npm start
+```

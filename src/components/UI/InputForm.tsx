@@ -1,5 +1,4 @@
 import { ErrorMessage, useField } from 'formik'
-import { Input } from './Input'
 
 interface Props {
   className: string

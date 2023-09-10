@@ -1,4 +1,4 @@
-import { Boton, Input } from './UI'
+import { BackTo, Boton, Input } from './UI'
 import { useJoinGame } from '../hooks'
 
 export const JoinGame = () => {
@@ -9,6 +9,7 @@ export const JoinGame = () => {
 
   return (
         <form className='flex justify-center w-6/12' onSubmit={handleSubmit}>
+           <BackTo text='Volver al menú principal' to='/' />
         {
           !showWaitingScreen
             ? (

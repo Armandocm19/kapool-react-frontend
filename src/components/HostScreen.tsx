@@ -3,6 +3,7 @@ import { Boton } from './UI'
 import { ListAnswers, WinnerScreen } from './UI/Game'
 import { Loadboard } from './UI/Game/Loadboard'
 import { useHostGame } from '../hooks'
+import { ImageToGame, Timer } from './Sections/Game'
 
 export const HostScreen = () => {
   const {
@@ -24,13 +25,16 @@ export const HostScreen = () => {
             </>
         )}
         {isPreviewScreen && (
-          <div className="flex flex-col items-center w-full">
-            <h1 className='text-white font-bold text-8xl'>{timer === 0 ? 5 : timer}</h1>
-          </div>
+          <Timer time={timer} />
         )}
         {isQuestionScreen && (
           <>
             <h1 className='text-white font-bold tracking-tight text-4xl'>{ currentQuestion?.question }</h1>
+            {
+              currentQuestion?.image && (
+                <ImageToGame styles='w-[18rem] max-w-[20rem]' url={currentQuestion.image.url} />
+              )
+            }
             <div className='w-20 border border-white h-20 mt-10 rounded-full flex items-center justify-center'>
               <h1 className='text-white font-bold text-4xl'>{timer}</h1>
             </div>

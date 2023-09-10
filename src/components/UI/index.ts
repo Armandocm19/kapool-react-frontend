@@ -1,5 +1,6 @@
+export { BackTo } from './BackTo'
 export * from './Boton'
-export * from './Input'
+export * from '../Sections/Game/Input'
 export * from './Navbar'
 export * from './InputForm'
 export * from './WelcomeTitle'

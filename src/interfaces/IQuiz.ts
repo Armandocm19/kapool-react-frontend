@@ -25,6 +25,13 @@ export interface questionItem {
   questionNumber?: number
   question: string
   timeForQuestion: number
+  image: ImageResponse | null
+}
+
+export interface ImageResponse {
+  ok: boolean
+  key: string
+  url: string
 }
 
 export interface answerItem {

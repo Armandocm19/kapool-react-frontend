@@ -20,6 +20,8 @@ module.exports = {
     'space-before-function-paren': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'off'
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/promise-function-async': 'off'
   }
 }

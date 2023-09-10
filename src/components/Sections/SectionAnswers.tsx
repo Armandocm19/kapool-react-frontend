@@ -16,9 +16,9 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
           </h2>
           <p className='text-zinc-500 font-bold tracking-tight'>La respuesta correcta debe ser marcada en la casilla</p>
 
-          <div className="w-7/12 grid grid-cols-2 gap-7 mt-7">
+          <div className="w-[80%] flex flex-col gap-7 mt-7">
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Input
                 type="text"
                 name='answer1'
@@ -37,11 +37,11 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer1
                 }
-                className="w-4 h-4 font-bold tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 font-bold cursor-pointer tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Input
                 type="text"
                 name='answer2'
@@ -60,11 +60,11 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer2
                 }
-                className="w-4 h-4 font-bold tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 font-bold cursor-pointer tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Input
                 type="text"
                 name='answer3'
@@ -84,11 +84,11 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer3
                 }
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 text-blue-600 cursor-pointer bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Input
                 type="text"
                 name='answer4'
@@ -107,7 +107,7 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
                 value={
                   inputsValue.answer4
                 }
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
+                className="w-4 h-4 text-blue-600 cursor-pointer bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
             </div>
           </div>

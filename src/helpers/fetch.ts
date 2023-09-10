@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { baseUrl } from '../utils'
 
 const fetchSinToken = async (endpoint: string, data?: any, method = 'GET') => {
@@ -16,6 +17,35 @@ const fetchSinToken = async (endpoint: string, data?: any, method = 'GET') => {
   }
 }
 
+const fetchToUploadImage = async (endpoint: string, data: File | null, method = 'GET') => {
+  const templateFormData = new FormData()
+  templateFormData.append('file', data!)
+  templateFormData.append('upload_preset', 'kapoolProject')
+  const url = `${baseUrl}/${endpoint}`
+  const cloudinaryResponse = await fetch(url, {
+    method,
+    body: templateFormData
+  }).then(async res => await res.json()).catch(err => err)
+
+  return cloudinaryResponse
+}
+
+const fetchToRemoveImage = async (endpoint: string, key: string, method = 'GET') => {
+  try {
+    const url = `${baseUrl}/${endpoint}`
+    const cloudinaryResponse = await axios.post(url, { key }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    return cloudinaryResponse.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export {
-  fetchSinToken
+  fetchSinToken,
+  fetchToUploadImage,
+  fetchToRemoveImage
 }

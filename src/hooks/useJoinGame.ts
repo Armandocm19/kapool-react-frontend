@@ -30,7 +30,7 @@ export const useJoinGame = () => {
     })
   }, [socket])
 
-  const onChangeData = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
     setCodeValue(prev => ({
       ...prev,
@@ -99,6 +99,6 @@ export const useJoinGame = () => {
 
     // functions
     handleSubmit,
-    onChangeData
+    handleInputChange
   }
 }

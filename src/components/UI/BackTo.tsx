@@ -1,7 +1,7 @@
 import { ArrowLeft } from '../../icons'
 
 interface Props {
-  text: string
+  text?: string
   to?: string
   fontSize?: string
 }

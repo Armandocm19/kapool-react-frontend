@@ -11,24 +11,25 @@ const GAME_INITIAL_STATE: QuizState = {
     questions: {
       questionNumber: 1,
       question: '',
-      timeForQuestion: 0
+      timeForQuestion: 0,
+      selectedImage: null
     },
     answers: {
       answer1: '',
       answer2: '',
       answer3: '',
-      answer4: ''
+      answer4: '',
+      correctAnswer: ''
     }
   }],
   winner: 'none',
-  questionNumberState: 1
+  currentQuestionNumber: 1
 }
 
 export const QuizProvider: FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(quizReducer, GAME_INITIAL_STATE)
 
   const addQuestion = (question: IQuizQuestions) => {
-    const { questionNumberState } = state
     if (state.questionsGame.find(item => item.questions.questionNumber === question.questions.questionNumber) != null) {
       dispatch({ type: '[Game] - Edit questions and answers', payload: question })
     } else {
@@ -37,7 +38,7 @@ export const QuizProvider: FC<Props> = ({ children }) => {
   }
 
   const changeNumberQuestion = (value: number) => {
-    const newValue = Math.max(state.questionNumberState + value, 0)
+    const newValue = Math.max(state.currentQuestionNumber + value, 0)
     dispatch({ type: '[Game] - Change number question in UI', payload: newValue })
   }
 

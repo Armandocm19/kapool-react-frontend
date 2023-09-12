@@ -4,7 +4,7 @@ import { type QuizState, type IQuizQuestions } from '../../interfaces'
 interface ContextProps {
   questionsGame: QuizState
   winner: string
-  questionNumberState: number
+  currentQuestionNumber: number
   changeNumberQuestion: (value: number) => void
   addQuestion: (question: IQuizQuestions) => void
 }

@@ -1,25 +1,28 @@
-import { type ChangeEvent, useContext, useState, useRef, type FormEvent } from 'react'
-import { INITIAL_STATE, INITIAL_STATE_CHECKBOX, INITIAL_STATE_INPUTS } from '../services/INITIAL_STATES'
-import { type QuizStateInDB, type ICheckboxProps, type IInputsProps, type IGame, type ImageResponse } from '../interfaces'
-import { QuizContext } from '../context/quiz'
-import Swal from 'sweetalert2'
+import { type ChangeEvent, useState, useRef, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createGame, createQuiz, removeImage, uploadImage } from '../api'
-import { generateCode } from '../utils'
+import { useGame } from './useGame'
+
+import { INITIAL_STATE_CHECKBOX, INITIAL_STATE_INPUTS } from '../services/INITIAL_STATES'
+import { type ICheckboxProps, type IInputsProps, type IGame, type ImageResponse, type answerItem, type questionItem } from '../interfaces'
+
+import Swal from 'sweetalert2'
 import { toast } from 'sonner'
 
-export const useValues = () => {
-  const { questionNumberState, changeNumberQuestion } = useContext(QuizContext)
-  const navigate = useNavigate()
+import { createGame, createQuiz, removeImage, uploadImage } from '../api'
+import { generateCode } from '../utils'
 
-  const [questionData, setQuestionData] = useState<QuizStateInDB>(INITIAL_STATE)
-  const [image, setImage] = useState<ImageResponse | null>(null)
+export const useValues = () => {
+  const navigate = useNavigate()
+  const {
+    currentQuestionNumber, questionData, timeForQuestion,
+    changeNumberQuestion, setQuestionData, setTimeForQuestion
+  } = useGame()
+  const [selectedImage, setSelectedImage] = useState<ImageResponse | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [checkboxAnswers, setCheckboxAnswers] = useState<ICheckboxProps>(INITIAL_STATE_CHECKBOX)
-  const [timeForQuestion, setTimeForQuestion] = useState(0)
+  const [selectedCheckboxAnswers, setSelectedCheckboxAnswers] = useState<ICheckboxProps>(INITIAL_STATE_CHECKBOX)
   const [inputsValue, setInputsValue] = useState<IInputsProps>(INITIAL_STATE_INPUTS)
 
-  const onFileSelected = async () => {
+  const handleFileSelection = async () => {
     const selectedFile = fileInputRef.current ? fileInputRef.current.files[0] : null
     const responseImage = await uploadImage(selectedFile)
     if (!responseImage) return
@@ -28,78 +31,25 @@ export const useValues = () => {
       return
     }
     toast.success('Imagen cargada correctamente')
-    setImage(responseImage.data)
+    setSelectedImage(responseImage.data)
   }
 
-  const onRemoveImage = async (event: FormEvent) => {
+  const handleImageRemoval = async (event: FormEvent) => {
     event.preventDefault()
-    const res = await removeImage(image!.key)
+    const res = await removeImage(selectedImage!.key)
     if (!res?.ok) {
       toast.error('Ocurrió un problema al remover la imagen')
       return
     }
     toast.success('Imagen removida correctamente')
-    setImage(null)
+    setSelectedImage(null)
   }
 
-  const onNextQuestion = (questionNumber?: number) => {
-    changeNumberQuestion(+1) // Check if the parameter comes, since if it comes it means that a new question will not be added
-    const newQuestions = {
-      questionNumber: questionNumberState,
-      question: inputsValue.question,
-      timeForQuestion,
-      image
-    }
-
-    const newAnswers: any = {
-      answer1: inputsValue.answer1,
-      answer2: inputsValue.answer2,
-      answer3: inputsValue.answer3,
-      answer4: inputsValue.answer4
-    }
-
-    const correctAnswer = Object.entries(checkboxAnswers).find(([key, value]) => value === true)
-    if (correctAnswer) newAnswers.correctAnswer = newAnswers[correctAnswer[0]]
-
-    if (questionNumber) {
-      const questionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber)
-      const updatedQuestions = questionData.questionsGame.map((question, i) => {
-        if (i === questionIndex) {
-          const newQuestionValues = questionData.questionsGame[questionIndex] = newQuestions
-          return newQuestionValues
-        }
-        return question
-      })
-      const updatedAnswers = questionData.answers.map((answer, i) => {
-        if (i === questionIndex) {
-          const newAnswerValues = questionData.answers[questionIndex] = newAnswers
-          return newAnswerValues
-        }
-        return answer
-      })
-      setQuestionData(({
-        questionsGame: updatedQuestions,
-        answers: updatedAnswers
-      }))
-    }
-
-    setQuestionData(prev => ({
-      questionsGame: [...prev.questionsGame, newQuestions],
-      answers: [...prev.answers, newAnswers]
-    }))
-
-    // Reset values
-    setInputsValue(INITIAL_STATE_INPUTS)
-    setCheckboxAnswers(INITIAL_STATE_CHECKBOX)
-    setTimeForQuestion(0)
-    setImage(null)
-  }
-
-  const onBeforeQuestion = (questionNumber: number) => {
-    const questionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber)
+  const setInputsValuesFromTheUser = (questionsGame: questionItem[], questionNumber: number, isPreviousQuestion: boolean) => {
+    let questionIndex = questionsGame.findIndex(question => question.questionNumber === questionNumber)
+    questionIndex = isPreviousQuestion ? questionIndex : questionIndex + 1
     const findQuestionGame = questionData.questionsGame[questionIndex]
     const findAnswerGame = questionData.answers[questionIndex]
-
     setInputsValue(({
       answer1: findAnswerGame.answer1,
       answer2: findAnswerGame.answer2,
@@ -107,18 +57,83 @@ export const useValues = () => {
       answer4: findAnswerGame.answer4,
       question: findQuestionGame.question
     }))
-    setCheckboxAnswers({
+    setSelectedCheckboxAnswers({
       answer1: findAnswerGame.answer1 === findAnswerGame.correctAnswer,
       answer2: findAnswerGame.answer2 === findAnswerGame.correctAnswer,
       answer3: findAnswerGame.answer3 === findAnswerGame.correctAnswer,
       answer4: findAnswerGame.answer4 === findAnswerGame.correctAnswer
     })
     setTimeForQuestion(findQuestionGame.timeForQuestion)
-    setImage(findQuestionGame.image ? findQuestionGame.image : null)
-    changeNumberQuestion(findQuestionGame.questionNumber! - 2)
+    setSelectedImage(findQuestionGame.selectedImage ? findQuestionGame.selectedImage : null)
   }
 
-  const onChangeData = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleNextQuestion = (questionNumber: number) => {
+    changeNumberQuestion(+1) // Check if the parameter comes, since if it comes it means that a new question will not be added
+
+    const newQuestions: questionItem = {
+      questionNumber: currentQuestionNumber,
+      question: inputsValue.question,
+      timeForQuestion,
+      selectedImage
+    }
+
+    const newAnswers: answerItem = {
+      answer1: inputsValue.answer1,
+      answer2: inputsValue.answer2,
+      answer3: inputsValue.answer3,
+      answer4: inputsValue.answer4,
+      correctAnswer: ''
+    }
+
+    const correctAnswer = Object.entries(selectedCheckboxAnswers).find(([key, value]) => value === true)
+    if (correctAnswer) newAnswers.correctAnswer = newAnswers[correctAnswer[0]]
+
+    const questionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber)
+    const nextQuestionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber + 1)
+    const updatedQuestions = questionData.questionsGame.map((question, i) => {
+      if (i === questionIndex) {
+        const newQuestionValues = questionData.questionsGame[questionIndex] = newQuestions
+        return newQuestionValues
+      }
+      return question
+    })
+
+    const updatedAnswers = questionData.answers.map((answer, i) => {
+      if (i === questionIndex) {
+        const newAnswerValues = questionData.answers[questionIndex] = newAnswers
+        return newAnswerValues
+      }
+      return answer
+    })
+
+    if (nextQuestionIndex === -1) {
+      const doesQuestionExist = questionData.questionsGame.some(question => question.questionNumber === questionNumber + 1)
+      if (doesQuestionExist) return
+      setQuestionData(prev => ({
+        questionsGame: [...prev.questionsGame, newQuestions],
+        answers: [...prev.answers, newAnswers]
+      }))
+    } else {
+      setInputsValuesFromTheUser(questionData.questionsGame, questionNumber, false)
+      setQuestionData({
+        questionsGame: updatedQuestions,
+        answers: updatedAnswers
+      })
+      return
+    }
+    // Reset values
+    setInputsValue(INITIAL_STATE_INPUTS)
+    setSelectedCheckboxAnswers(INITIAL_STATE_CHECKBOX)
+    setTimeForQuestion(0)
+    setSelectedImage(null)
+  }
+
+  const handlePreviousQuestion = (questionNumber: number) => {
+    setInputsValuesFromTheUser(questionData.questionsGame, questionNumber, true)
+    changeNumberQuestion(-1)
+  }
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = event.target
 
     setInputsValue(prev => ({
@@ -127,7 +142,7 @@ export const useValues = () => {
     }))
   }
 
-  const onChangeTime = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleTimeChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
 
     const newValue = Math.max(Number(value), 0)
@@ -135,7 +150,7 @@ export const useValues = () => {
     setTimeForQuestion(newValue <= 60 ? newValue : 60)
   }
 
-  const onChangeCheckbox = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { checked, name } = event.target
     let newCheckboxAnswers = INITIAL_STATE_CHECKBOX
 
@@ -144,10 +159,10 @@ export const useValues = () => {
       [name]: checked
     }
 
-    setCheckboxAnswers(newCheckboxAnswers)
+    setSelectedCheckboxAnswers(newCheckboxAnswers)
   }
 
-  const onSavedGame = () => {
+  const handleSaveGame = () => {
     Swal.fire({
       title: '¿Estás seguro/a de finalizar, y guardar el juego?',
       showDenyButton: true,
@@ -174,6 +189,7 @@ export const useValues = () => {
         await createGame(newGame)
         navigate('/')
         Swal.fire('Guardado!', '', 'success')
+        changeNumberQuestion(-(currentQuestionNumber - 1))
       } else if (result.isDenied) {
         Swal.fire('Juego no guardado. Puedes continuar', '', 'info')
       }
@@ -182,21 +198,21 @@ export const useValues = () => {
 
   return {
 
-    questionNumberState,
+    currentQuestionNumber,
     inputsValue,
-    checkboxAnswers,
+    selectedCheckboxAnswers,
     timeForQuestion,
-    image,
+    selectedImage,
 
     // Methods
-    onNextQuestion,
-    onChangeData,
-    onChangeTime,
-    onChangeCheckbox,
-    onSavedGame,
-    onFileSelected,
+    handleNextQuestion,
+    handleInputChange,
+    handleTimeChange,
+    handleCheckboxChange,
+    handleFileSelection,
     fileInputRef,
-    onRemoveImage,
-    onBeforeQuestion
+    handleImageRemoval,
+    handlePreviousQuestion,
+    handleSaveGame
   }
 }

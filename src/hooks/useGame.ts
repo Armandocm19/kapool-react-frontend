@@ -1,10 +1,18 @@
 import { useState, useEffect, useContext } from 'react'
-import { SocketContext } from '../context/Socket'
-import { type IGame } from '../interfaces'
-import { getGamesByOwner, updateStateGame } from '../api'
 import { useNavigate } from 'react-router-dom'
 
-export const useGaMme = () => {
+import { SocketContext } from '../context/Socket'
+import { QuizContext } from '../context/quiz'
+
+import { type QuizStateInDB, type IGame } from '../interfaces'
+
+import { getGamesByOwner, updateStateGame } from '../api'
+import { INITIAL_STATE } from '../services'
+
+export const useGame = () => {
+  const { currentQuestionNumber, changeNumberQuestion } = useContext(QuizContext)
+  const [questionData, setQuestionData] = useState<QuizStateInDB>(INITIAL_STATE)
+  const [timeForQuestion, setTimeForQuestion] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
   const { initializeSocket } = useContext(SocketContext)
   const [error, setError] = useState({
@@ -52,9 +60,15 @@ export const useGaMme = () => {
     isLoading,
     gamesByOwner,
     error,
+    currentQuestionNumber,
+    questionData,
+    timeForQuestion,
 
     // Methods
     activeGame,
-    restartGame
+    restartGame,
+    changeNumberQuestion,
+    setQuestionData,
+    setTimeForQuestion
   }
 }

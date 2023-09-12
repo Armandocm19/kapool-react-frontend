@@ -1,11 +1,11 @@
 import { Ring } from '@uiball/loaders'
 
 import { BackTo } from './UI'
-import { useGaMme } from '../hooks'
+import { useGame } from '../hooks'
 
 export const ListGames = () => {
   const { isLoading, gamesByOwner, error, activeGame, restartGame } =
-    useGaMme()
+    useGame()
 
   return (
     <div className="w-screen flex justify-center flex-col items-center pt-20 pb-20">

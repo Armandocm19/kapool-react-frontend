@@ -1,20 +1,27 @@
-import { useValues } from '../hooks'
-import { BackTo, Boton } from './UI'
-import { SectionAnswers, SectionQuestions, SectionTime } from './Sections'
-import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import { useGame, useValues } from '../hooks'
+
+import Swal from 'sweetalert2'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
+
+import { Boton } from './UI'
 import { Answer } from './UI/Game'
+
+import { SectionAnswers, SectionQuestions, SectionTime } from './Sections'
 import { ImageToGame } from './Sections/Game'
+import { ArrowLeft } from '../icons'
 
 export const CreatePage = () => {
   const {
-    onChangeTime, onNextQuestion,
-    onSavedGame, onChangeData,
-    onChangeCheckbox, inputsValue,
-    checkboxAnswers, questionNumberState,
-    timeForQuestion, image, fileInputRef,
-    onFileSelected, onRemoveImage, onBeforeQuestion
+    handleTimeChange, handleNextQuestion,
+    handleInputChange, handleCheckboxChange, inputsValue,
+    selectedCheckboxAnswers, timeForQuestion, selectedImage,
+    fileInputRef, handleFileSelection, handleImageRemoval,
+    handlePreviousQuestion, handleSaveGame
   } = useValues()
+
+  const { currentQuestionNumber, changeNumberQuestion } = useGame()
 
   const navigate = useNavigate()
 
@@ -30,6 +37,7 @@ export const CreatePage = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         navigate('/')
+        changeNumberQuestion(-(currentQuestionNumber - 1))
       }
     })
   }
@@ -37,9 +45,9 @@ export const CreatePage = () => {
   return (
       <>
         {
-          questionNumberState > 1 && (
+          currentQuestionNumber > 1 && (
             <Boton
-              onClick={onSavedGame}
+              onClick={handleSaveGame }
               className='absolute top-0 right-0 w-64 font-bold tracking-tight scale bg-yellow-600 p-2 text-white rounded mt-4 mr-6 ease-in z-10
               duration-100 hover:scale-110'
               message='Guardar juego'
@@ -48,49 +56,49 @@ export const CreatePage = () => {
         }
 
         <section className='h-full w-[30%] absolute flex justify-center left-0 bg-blur'>
-          <button onClick={backToMain} className='w-full flex absolute left-0'>
-            <BackTo text='Volver al menú principal' fontSize='text-xl'/>
-          </button>
+          <Tippy content="Volver al menú principal" placement="bottom">
+            <button onClick={backToMain} className='absolute w-auto h-4 flex justify-center items-center left-5 top-5'>
+              <ArrowLeft styles='text-[#EF8354]' />
+            </button>
+          </Tippy>
           <form className='flex flex-col justify-center items-center w-11/12' noValidate autoComplete='off'>
             <SectionQuestions
-              questionNumberState={questionNumberState}
-              onchangeData={onChangeData}
+              questionNumberState={currentQuestionNumber }
+              onchangeData={handleInputChange }
               question={inputsValue.question}
-              onFileSelected={onFileSelected}
+              handleFileSelection ={handleFileSelection }
               fileInputRef={fileInputRef}
-              image={image}
-              onRemoveImage={onRemoveImage}
+              selectedImage={selectedImage}
+              handleImageRemoval ={handleImageRemoval}
             />
 
             <SectionAnswers
-              onChangeData={onChangeData}
-              onChangeCheckbox={onChangeCheckbox}
-              checkboxAnswers={checkboxAnswers}
+              onChangeData={handleInputChange }
+              handleCheckboxChange ={handleCheckboxChange }
+              selectedCheckboxAnswers={selectedCheckboxAnswers}
               inputsValue={inputsValue}
             />
 
             <SectionTime
-              onChangeTime={onChangeTime}
+              handleTimeChange ={handleTimeChange }
               timeForQuestion={timeForQuestion}
             />
 
             <div className='flex gap-5 mt-7'>
               {
-                questionNumberState !== 1 && (
-                  <div onClick={() => { onBeforeQuestion(questionNumberState - 1) }}>
+                currentQuestionNumber !== 1 && (
                     <Boton
                       className='w-auto scale bg-[#f8f8f8] text-[#242634] px-4 py-2 font-bold rounded mt-4 ease-in duration-100 hover:scale-110'
                       message='Anterior pregunta'
+                      onClick={() => { handlePreviousQuestion(currentQuestionNumber - 1) }}
                     />
-                  </div>
                 )
               }
-              <div onClick={() => { onNextQuestion() }}>
                 <Boton
                   className='w-auto scale bg-[#EF8354] text-[#242634] px-4 py-2  font-bold rounded mt-4 ease-in duration-100 hover:scale-110'
-                  message='Siguiente pregunta'
+                  message='Completar pregunta'
+                  onClick={() => { handleNextQuestion(currentQuestionNumber) }}
                   />
-              </div>
             </div>
 
           </form>
@@ -99,8 +107,8 @@ export const CreatePage = () => {
         <section className='absolute right-0 h-full w-[70%] flex flex-col justify-center items-center z-0 gap-8 px-10'>
           <h1 className='text-5xl text-white font-bold tracking-tight text-justify'>{inputsValue.question ? inputsValue.question : 'Tu pregunta...'}</h1>
           {
-            image && (
-              <ImageToGame styles='w-[18rem] max-w-[20rem]' url={image.url} />
+            selectedImage && (
+              <ImageToGame styles='w-[18rem] max-w-[20rem]' url={selectedImage.url} />
             )
           }
           <div className='relative w-20 border border-white h-20 rounded-full flex items-center justify-center'>
@@ -111,7 +119,7 @@ export const CreatePage = () => {
               <Answer
                 className={
                 `flex items-center w-full bg-red-600 font-bold
-                px-10 py-5 justify-between rounded scale duration-100 ${checkboxAnswers.answer1 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
+                px-10 py-5 justify-between rounded scale duration-100 ${selectedCheckboxAnswers.answer1 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
                 }
                 name='firstButton'
                 icon='circle'
@@ -121,7 +129,7 @@ export const CreatePage = () => {
               <Answer
                 className={
                 `flex items-center w-full bg-violet-600 font-bold
-                px-10 py-5 justify-between rounded scale duration-100 ${checkboxAnswers.answer2 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
+                px-10 py-5 justify-between rounded scale duration-100 ${selectedCheckboxAnswers.answer2 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
                 }
                 name='firstButton'
                 icon='triangle'
@@ -134,7 +142,7 @@ export const CreatePage = () => {
               <Answer
                 className={
                 `flex items-center w-full bg-yellow-600 font-bold
-                px-10 py-5 justify-between rounded scale duration-100 ${checkboxAnswers.answer3 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
+                px-10 py-5 justify-between rounded scale duration-100 ${selectedCheckboxAnswers.answer3 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
                 }
                 name='firstButton'
                 icon='square'
@@ -144,7 +152,7 @@ export const CreatePage = () => {
               <Answer
                 className={
                 `flex items-center w-full bg-blue-600 font-bold
-                px-10 py-5 justify-between rounded scale duration-100 ${checkboxAnswers.answer4 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
+                px-10 py-5 justify-between rounded scale duration-100 ${selectedCheckboxAnswers.answer4 && 'scale-105 border-4 border-green-600 shadow-lg shadow-green-600'}`
                 }
                 name='firstButton'
                 icon='diamond'

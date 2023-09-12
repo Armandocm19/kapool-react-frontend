@@ -10,26 +10,26 @@ interface Props {
   questionNumberState: number
   onchangeData: (e: React.ChangeEvent<HTMLInputElement>) => void
   question: string
-  onFileSelected: () => Promise<void>
+  handleFileSelection: () => Promise<void>
   fileInputRef: React.RefObject<HTMLInputElement>
-  image: ImageResponse | null
-  onRemoveImage: (event: React.FormEvent<Element>) => Promise<void>
+  selectedImage: ImageResponse | null
+  handleImageRemoval: (event: React.FormEvent<Element>) => Promise<void>
 }
 
-export const SectionQuestions = ({ questionNumberState, onchangeData, question, onFileSelected, fileInputRef, image, onRemoveImage }: Props) => {
+export const SectionQuestions = ({ questionNumberState, onchangeData, question, handleFileSelection, fileInputRef, selectedImage, handleImageRemoval }: Props) => {
   return (
     <>
       <h1 className="text-white text-4xl font-bold tracking-tight">
         {`PREGUNTA NUMERO ${questionNumberState}`}
       </h1>
-      {image
+      {selectedImage
         ? (
         <div className="relative flex w-36 max-w-[10rem] mt-5">
           <picture>
-            <img src={image.url} alt="imagen para la pregunta" />
+            <img src={selectedImage.url} alt="imagen para la pregunta" />
           </picture>
           <Tippy content="Remover imagen" placement="top-start">
-            <button className='absolute bottom-1 left-1' onClick={onRemoveImage}>
+            <button className='absolute bottom-1 left-1' onClick={handleImageRemoval }>
               <RemoveIcon width='22' height='22' className='text-red-600 cursor-pointer' />
             </button>
           </Tippy>
@@ -48,7 +48,7 @@ export const SectionQuestions = ({ questionNumberState, onchangeData, question, 
             ref={fileInputRef}
             type="file"
             accept="image/png, image/gif, image/jpg"
-            onChange={onFileSelected}
+            onChange={handleFileSelection }
           />
         </label>
           )}

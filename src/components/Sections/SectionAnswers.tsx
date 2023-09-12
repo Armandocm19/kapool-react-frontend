@@ -3,12 +3,12 @@ import { Input } from '../UI'
 
 interface Props {
   onChangeData: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeCheckbox: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   inputsValue: IInputsProps
-  checkboxAnswers: ICheckboxProps
+  selectedCheckboxAnswers: ICheckboxProps
 }
 
-export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, checkboxAnswers }: Props) => {
+export const SectionAnswers = ({ onChangeData, handleCheckboxChange, inputsValue, selectedCheckboxAnswers }: Props) => {
   return (
         <>
           <h2 className='text-white text-2xl mt-8 font-bold tracking-tight'
@@ -32,8 +32,8 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
               <Input
                 type="checkbox"
                 name='answer1'
-                onChange={onChangeCheckbox}
-                checked={checkboxAnswers.answer1}
+                onChange={handleCheckboxChange }
+                checked={selectedCheckboxAnswers.answer1}
                 value={
                   inputsValue.answer1
                 }
@@ -44,21 +44,21 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
             <div className="flex items-center gap-2">
               <Input
                 type="text"
-                name='answer2'
+                name='answer3'
                 onChange={onChangeData}
                 value={
-                  inputsValue.answer2
+                  inputsValue.answer3
                 }
                 className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
               />
               <Input
                 type="checkbox"
-                name='answer2'
-                onChange={onChangeCheckbox}
-                checked={checkboxAnswers.answer2}
+                name='answer3'
+                onChange={handleCheckboxChange }
+                checked={selectedCheckboxAnswers.answer3}
                 value={
-                  inputsValue.answer2
+                  inputsValue.answer3
                 }
                 className="w-4 h-4 font-bold cursor-pointer tracking-tight text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
@@ -67,10 +67,10 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
             <div className="flex items-center gap-2">
               <Input
                 type="text"
-                name='answer3'
+                name='answer2'
                 onChange={onChangeData}
                 value={
-                  inputsValue.answer3
+                  inputsValue.answer2
                 }
                 className='outline-0 font-bold tracking-tight shadow w-full bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 focus:shadow-zinc-500 ease-in duration-100'
                 placeholder='Escribe la posible respuesta...'
@@ -78,11 +78,11 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
 
               <Input
                 type="checkbox"
-                name='answer3'
-                onChange={onChangeCheckbox}
-                checked={checkboxAnswers.answer3}
+                name='answer2'
+                onChange={handleCheckboxChange }
+                checked={selectedCheckboxAnswers.answer2}
                 value={
-                  inputsValue.answer3
+                  inputsValue.answer2
                 }
                 className="w-4 h-4 text-blue-600 cursor-pointer bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 ml-1"
                 />
@@ -102,8 +102,8 @@ export const SectionAnswers = ({ onChangeData, onChangeCheckbox, inputsValue, ch
               <Input
                 type="checkbox"
                 name='answer4'
-                onChange={onChangeCheckbox}
-                checked={checkboxAnswers.answer4}
+                onChange={handleCheckboxChange }
+                checked={selectedCheckboxAnswers.answer4}
                 value={
                   inputsValue.answer4
                 }

@@ -4,7 +4,7 @@ import { useJoinGame } from '../hooks'
 export const JoinGame = () => {
   const {
     showWaitingScreen, dataFromServer, codeValue,
-    error, handleSubmit, onChangeData
+    error, handleSubmit, handleInputChange
   } = useJoinGame()
 
   return (
@@ -18,7 +18,7 @@ export const JoinGame = () => {
             <Input
                 className='outline-0 w-64 font-bold tracking-tight shadow bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 mt-8 focus:shadow-zinc-500 ease-in duration-100'
                 type='text'
-                onChange={onChangeData}
+                onChange={handleInputChange }
                 value={!dataFromServer.code ? codeValue.code : codeValue.name}
                 name={!dataFromServer.code ? 'code' : 'name'}
                 placeholder={!dataFromServer.code ? 'A9J3B3...' : 'John...'}

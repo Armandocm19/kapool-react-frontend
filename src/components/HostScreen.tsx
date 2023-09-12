@@ -11,7 +11,6 @@ export const HostScreen = () => {
     isPreviewScreen, isLeaderboardScreen, isQuestionScreen,
     isGameStarted, leaderboard, startGame
   } = useHostGame()
-
   return (
       <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-20 pb-20'}`}>
         {!isGameStarted && (
@@ -31,8 +30,8 @@ export const HostScreen = () => {
           <>
             <h1 className='text-white font-bold tracking-tight text-4xl'>{ currentQuestion?.question }</h1>
             {
-              currentQuestion?.image && (
-                <ImageToGame styles='w-[18rem] max-w-[20rem]' url={currentQuestion.image.url} />
+              currentQuestion?.selectedImage && (
+                <ImageToGame styles='w-[18rem] max-w-[20rem]' url={currentQuestion.selectedImage.url} />
               )
             }
             <div className='w-20 border border-white h-20 mt-10 rounded-full flex items-center justify-center'>

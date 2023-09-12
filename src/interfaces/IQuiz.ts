@@ -8,7 +8,7 @@ export interface QuizStateInDB {
 export interface QuizState {
   questionsGame: IQuizQuestions[]
   winner: string
-  questionNumberState: number
+  currentQuestionNumber: number
 }
 
 export interface IQuizQuestionsParameters {
@@ -25,7 +25,7 @@ export interface questionItem {
   questionNumber?: number
   question: string
   timeForQuestion: number
-  image: ImageResponse | null
+  selectedImage: ImageResponse | null
 }
 
 export interface ImageResponse {

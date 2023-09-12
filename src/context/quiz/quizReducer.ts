@@ -20,7 +20,7 @@ export const quizReducer = (state: QuizState, action: QuizActionType): QuizState
     case '[Game] - Change number question in UI':
       return {
         ...state,
-        questionNumberState: action.payload
+        currentQuestionNumber: action.payload
       }
   }
 }

@@ -2,10 +2,20 @@ import { Ring } from '@uiball/loaders'
 
 import { BackTo } from './UI'
 import { useGame } from '../hooks'
+import { RemoveIcon } from '../icons'
+import { toast } from 'sonner'
 
 export const ListGames = () => {
-  const { isLoading, gamesByOwner, error, activeGame, restartGame } =
-    useGame()
+  const { isLoading, gamesByOwner, error, activeGame, restartGame, removeGameToBD } = useGame()
+
+  const handleToRemoveGameInDB = async (quizId: string, gameId: string) => {
+    const { ok, msg } = await removeGameToBD(quizId, gameId)
+    if (!ok) {
+      toast.error(msg)
+      return
+    }
+    toast.success(msg)
+  }
 
   return (
     <div className="w-screen flex justify-center flex-col items-center pt-20 pb-20">
@@ -54,27 +64,37 @@ export const ListGames = () => {
                   <td className="whitespace-nowrap px-6 py-2">
                     {game.isLive ? 'Activado' : 'Desactivado'}
                   </td>
-                  <td className="whitespace-nowrap px-6 py-2 flex justify-center">
+                  <td className="whitespace-nowrap  py-2 flex justify-center items-center">
                     {game.isLive
                       ? (
-                      <button
-                        className="w-full bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105"
-                        onClick={async () => {
-                          await restartGame(game)
-                        }}
-                      >
-                        Reiniciar
-                      </button>
+                      <div className='w-full flex justify-center items-center gap-2'>
+                        <button
+                          className="w-auto bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105"
+                          onClick={async () => {
+                            await restartGame(game)
+                          }}
+                        >
+                          Reiniciar
+                        </button>
+                        <button onClick={() => handleToRemoveGameInDB(game.quizId, game._id!)}>
+                          <RemoveIcon width='25' height='25' className='text-red-600' />
+                        </button>
+                      </div>
                         )
                       : (
-                      <button
-                        className="w-full bg-[#EF8354] text-[#242634] font-bold rounded p-2 ease-in duration-100 hover:scale-105"
-                        onClick={async () => {
-                          await activeGame(game)
-                        }}
-                      >
-                        Activar
-                      </button>
+                      <div className='w-full flex justify-center items-center gap-2'>
+                        <button
+                          className="w-auto bg-[#EF8354] text-[#242634] font-bold rounded px-3 py-2 ease-in duration-100 hover:scale-105"
+                          onClick={async () => {
+                            await activeGame(game)
+                          }}
+                        >
+                          Activar
+                        </button>
+                        <button onClick={() => handleToRemoveGameInDB(game.quizId, game._id!)}>
+                          <RemoveIcon width='25' height='25' className='text-red-600 cursor-pointer' />
+                        </button>
+                      </div>
                         )}
                   </td>
                 </tr>

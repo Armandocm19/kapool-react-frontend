@@ -6,8 +6,9 @@ import { QuizContext } from '../context/quiz'
 
 import { type QuizStateInDB, type IGame } from '../interfaces'
 
-import { getGamesByOwner, updateStateGame } from '../api'
+import { getGamesByOwner, removeQuiz, updateStateGame } from '../api'
 import { INITIAL_STATE } from '../services'
+import { removeGame } from '../api/game'
 
 export const useGame = () => {
   const { currentQuestionNumber, changeNumberQuestion } = useContext(QuizContext)
@@ -51,6 +52,30 @@ export const useGame = () => {
     getListGames()
   }
 
+  const removeGameToBD = async (quizId: string, gameId: string) => {
+    const responseToRemoveQuiz = await removeQuiz(quizId)
+    // if (!resp) return
+    if (!responseToRemoveQuiz.ok) {
+      return {
+        ok: responseToRemoveQuiz.ok,
+        msg: 'Ocurrió un problema al eliminar el quiz'
+      }
+    }
+    const responseToRemoveGame = await removeGame(gameId)
+    if (!responseToRemoveGame.ok) {
+      return {
+        ok: responseToRemoveGame.ok,
+        msg: 'Ocurrió un problema al eliminar la partida'
+      }
+    }
+
+    getListGames()
+    return {
+      ok: responseToRemoveGame.ok,
+      msg: responseToRemoveGame.msg
+    }
+  }
+
   useEffect(() => {
     getListGames()
   }, [])
@@ -69,6 +94,7 @@ export const useGame = () => {
     restartGame,
     changeNumberQuestion,
     setQuestionData,
-    setTimeForQuestion
+    setTimeForQuestion,
+    removeGameToBD
   }
 }

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { type ILeaderboard } from '../../../interfaces/ILeaderboard'
 import { fireworks } from '../../../utils'
 import '../../../styles/loades.css'
+import { BackTo } from '../BackTo'
 
 interface IProps {
   leaderboard: ILeaderboard[]
@@ -36,6 +37,7 @@ export const WinnerScreen = ({ leaderboard }: IProps) => {
         )}
       {!previewScreenWinner && (
         <section className="w-full h-screen flex items-center justify-between bg-gradient-to-b flex-col text-[#E3E6E8] relative">
+          <BackTo text="Volver al menú principal" to="/" />
           <h1 className="text-7xl font-bold tracking-tight pt-32">Podium</h1>
           <div className="flex items-end h-[65vh]">
           {topWinners.length > 1 && (

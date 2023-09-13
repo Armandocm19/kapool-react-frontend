@@ -28,3 +28,16 @@ export const createQuiz = async (game: QuizStateInDB) => {
     console.error('Error al almacenar datos: ', error)
   }
 }
+
+export const removeQuiz = async (id: string) => {
+  const resp = await fetchSinToken(`quiz/${id}`, id, 'DELETE')
+  const body = await resp.json()
+
+  if (!body.ok) {
+    return { ok: false, msg: 'Ocurrió un problema al eliminar el quiz' }
+  }
+  return {
+    ok: true,
+    msg: 'Quiz eliminado correctamente'
+  }
+}

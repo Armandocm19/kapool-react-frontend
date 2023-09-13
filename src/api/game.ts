@@ -104,3 +104,15 @@ export const removeImage = async (key: string) => {
     return { ok: false }
   }
 }
+
+export const removeGame = async (id: string) => {
+  const resp = await fetchSinToken(`removeGame/${id}`, id, 'DELETE')
+  const body = await resp.json()
+  if (!body.ok) {
+    return { ok: false, msg: 'Ocurrió un problema al eliminar la partida' }
+  }
+  return {
+    ok: true,
+    msg: 'Partida eliminada correctamente'
+  }
+}

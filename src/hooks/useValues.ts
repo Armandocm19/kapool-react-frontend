@@ -21,9 +21,11 @@ export const useValues = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [selectedCheckboxAnswers, setSelectedCheckboxAnswers] = useState<ICheckboxProps>(INITIAL_STATE_CHECKBOX)
   const [inputsValue, setInputsValue] = useState<IInputsProps>(INITIAL_STATE_INPUTS)
+  const [isUpdated, setIsUpdated] = useState<boolean>(false)
 
   const handleFileSelection = async () => {
-    const selectedFile = fileInputRef.current ? fileInputRef.current.files[0] : null
+    if (!fileInputRef.current) return
+    const selectedFile = fileInputRef.current.files ? fileInputRef.current.files[0] : null
     const responseImage = await uploadImage(selectedFile)
     if (!responseImage) return
     if (!responseImage?.ok) {
@@ -65,6 +67,15 @@ export const useValues = () => {
     })
     setTimeForQuestion(findQuestionGame.timeForQuestion)
     setSelectedImage(findQuestionGame.selectedImage ? findQuestionGame.selectedImage : null)
+    setIsUpdated(true)
+  }
+
+  const handleResetValues = () => {
+    // Reset values
+    setInputsValue(INITIAL_STATE_INPUTS)
+    setSelectedCheckboxAnswers(INITIAL_STATE_CHECKBOX)
+    setTimeForQuestion(0)
+    setSelectedImage(null)
   }
 
   const handleNextQuestion = (questionNumber: number) => {
@@ -86,7 +97,7 @@ export const useValues = () => {
     }
 
     const correctAnswer = Object.entries(selectedCheckboxAnswers).find(([key, value]) => value === true)
-    if (correctAnswer) newAnswers.correctAnswer = newAnswers[correctAnswer[0]]
+    if (correctAnswer) newAnswers.correctAnswer = newAnswers[correctAnswer[0] as keyof answerItem]
 
     const questionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber)
     const nextQuestionIndex = questionData.questionsGame.findIndex(question => question.questionNumber === questionNumber + 1)
@@ -107,25 +118,23 @@ export const useValues = () => {
     })
 
     if (nextQuestionIndex === -1) {
-      const doesQuestionExist = questionData.questionsGame.some(question => question.questionNumber === questionNumber + 1)
-      if (doesQuestionExist) return
+      if (isUpdated) {
+        handleResetValues()
+        return
+      }
       setQuestionData(prev => ({
         questionsGame: [...prev.questionsGame, newQuestions],
         answers: [...prev.answers, newAnswers]
       }))
+      setIsUpdated(false)
+      handleResetValues()
     } else {
       setInputsValuesFromTheUser(questionData.questionsGame, questionNumber, false)
       setQuestionData({
         questionsGame: updatedQuestions,
         answers: updatedAnswers
       })
-      return
     }
-    // Reset values
-    setInputsValue(INITIAL_STATE_INPUTS)
-    setSelectedCheckboxAnswers(INITIAL_STATE_CHECKBOX)
-    setTimeForQuestion(0)
-    setSelectedImage(null)
   }
 
   const handlePreviousQuestion = (questionNumber: number) => {
@@ -177,10 +186,9 @@ export const useValues = () => {
         const dataQuiz = await createQuiz(questionData)
 
         const newCode = generateCode()
-        const { newQuiz } = dataQuiz
         const newGame: IGame = {
           owner: creatorId,
-          quizId: newQuiz._id,
+          quizId: dataQuiz!.newQuiz._id,
           hostId: newCode,
           playerList: [],
           playerResultList: [],

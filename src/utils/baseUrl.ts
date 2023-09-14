@@ -1,2 +1,2 @@
 
-export const baseUrl = 'https://kapool-backend-ryfd-dev.fl0.io/api'
+export const baseUrl = import.meta.env.VITE_BACKEND_URL

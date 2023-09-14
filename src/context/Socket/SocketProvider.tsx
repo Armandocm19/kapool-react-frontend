@@ -7,7 +7,8 @@ interface Props {
   children: JSX.Element | JSX.Element[]
 }
 
-const socket = io('https://kapool-backend-ryfd-dev.fl0.io')
+const backendURL = String(import.meta.env.VITE_BACKEND_URL)
+const socket = io(backendURL.substring(38, 0)) // Con el substring recorto el path por defecto de la url
 
 export const SocketProvider: FC<Props> = ({ children }) => {
   const [hostId, setHostId] = useState('')

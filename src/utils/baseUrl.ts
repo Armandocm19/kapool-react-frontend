@@ -1,2 +1,2 @@
 
-export const baseUrl = 'http://localhost:9000/api'
+export const baseUrl = 'https://kapool-backend-ryfd-dev.fl0.io/api'

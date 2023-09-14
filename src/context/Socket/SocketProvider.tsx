@@ -3,17 +3,11 @@ import { SocketContext } from './'
 import { io } from 'socket.io-client'
 import { getGame } from '../../api'
 
-// export interface IGameData {
-//   quizId: string
-//   isLive: boolean
-//   hostId: string
-// }
-
 interface Props {
   children: JSX.Element | JSX.Element[]
 }
 
-const socket = io('http://localhost:9000')
+const socket = io('https://kapool-backend-ryfd-dev.fl0.io')
 
 export const SocketProvider: FC<Props> = ({ children }) => {
   const [hostId, setHostId] = useState('')

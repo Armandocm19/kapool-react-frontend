@@ -28,7 +28,7 @@ export const HostScreen = () => {
         )}
         {isQuestionScreen && (
           <>
-            <h1 className='text-white font-bold tracking-tight text-4xl'>{ currentQuestion?.question }</h1>
+            <h1 className='text-white font-bold tracking-tight text-4xl px-3'>{ currentQuestion?.question }</h1>
             {
               currentQuestion?.selectedImage && (
                 <ImageToGame styles='w-[18rem] max-w-[20rem]' url={currentQuestion.selectedImage.url} />

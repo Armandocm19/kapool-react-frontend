@@ -9,7 +9,7 @@ interface IPlayer {
 }
 
 export function Players () {
-  const { socket, hostId } = useContext(SocketContext)
+  const { socket } = useContext(SocketContext)
 
   const [playersList, setPlayersList] = useState<IPlayer[]>([])
 
@@ -31,7 +31,7 @@ export function Players () {
             playersList.map(player => (
               <div key={player.socketId} >
                     <div className="flex flex-col justify-center items-center">
-                        <UserIcon />
+                        <UserIcon className='text-yellow-300' />
                         <p className='text-xl font-bold tracking-tigh text-white text-center'>{player.id}</p>
                     </div>
                   </div>

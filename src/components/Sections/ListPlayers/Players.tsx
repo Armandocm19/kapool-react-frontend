@@ -26,7 +26,7 @@ export function Players () {
           ? (
         <div className='w-screen flex flex-col items-center justify-center'>
           <h1 className="text-5xl font-bold tracking-tigh text-white">Lista de jugadores</h1>
-          <div className="max-w-[700px] grid grid-rows-2 grid-cols-3 place-content-center gap-10 mt-10">
+          <div className={`max-w-[700px] ${playersList.length === 3 ? 'grid grid-rows-2 grid-cols-3 place-content-center' : 'flex justify-center items-center'} gap-10 mt-10`}>
           {
             playersList.map(player => (
               <div key={player.socketId} >

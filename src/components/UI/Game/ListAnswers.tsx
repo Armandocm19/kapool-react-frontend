@@ -12,7 +12,8 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
             <Answer
                 className={
                 `flex items-center w-full bg-red-600 font-bold
-                p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} md:p-8`
+                px-3 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} 
+                h-20 md:h-25 md:px-8 lg:px-10 lg:h-32`
                 }
                 name='firstButton'
                 icon='circle'
@@ -22,7 +23,8 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               <Answer
                 className={
                 `flex items-center w-full bg-green-600 font-bold
-                p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} md:p-8`
+                px-3 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} 
+                h-20 md:h-25 md:px-8 lg:px-10 lg:h-32`
                 }
                 name='firstButton'
                 icon='triangle'
@@ -32,7 +34,8 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               <Answer
                 className={
                 `flex items-center w-full bg-yellow-600 font-bold
-                p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} md:p-8`
+                px-3 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} 
+                h-20 md:h-25 md:px-8 lg:px-10 lg:h-32`
                 }
                 name='firstButton'
                 icon='square'
@@ -42,7 +45,8 @@ export const ListAnswers = ({ host = false, currentAnswerProps }: Props) => {
               <Answer
                 className={
                 `flex items-center w-full bg-blue-600 font-bold
-                p-10 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} md:p-8`
+                px-3 justify-between rounded ${!host && 'cursor-pointer'} scale duration-100 ${!host && 'hover:scale-105'} 
+                h-20 md:h-25 md:px-8 lg:px-10 lg:h-32`
                 }
                 name='firstButton'
                 icon='diamond'

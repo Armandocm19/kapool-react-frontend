@@ -21,33 +21,29 @@ export const PlayerScreen = () => {
                   <>
                     <div className="w-full grid grid-cols-2 gap-10 mt-7 md:gap-5">
                       <Answer
-                          className={
-                          'flex items-center w-full p-32 bg-red-600 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
-                          }
+                          className='flex items-center w-full px-3 bg-red-600 justify-between rounded cursor-pointer scale duration-100 hover:scale-105
+                          h-20 md:h-25 md:px-8 lg:px-10 lg:h-32'
                           name='firstButton'
                           onClick={() => { sendAnswer(0) }}
                           icon='circle'
                       />
                       <Answer
-                          className={
-                          'flex items-center w-full bg-green-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
-                          }
+                          className='flex items-center w-full bg-green-600 px-3 justify-between rounded cursor-pointer scale duration-100 hover:scale-105
+                          h-20 md:h-25 md:px-8 lg:px-10 lg:h-32'
                           name='secondButton'
                           onClick={() => { sendAnswer(1) }}
                           icon='triangle'
                       />
                       <Answer
-                          className={
-                          'flex items-center w-full bg-yellow-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
-                          }
+                          className='flex items-center w-full bg-yellow-600 px-3 justify-between rounded cursor-pointer scale duration-100 hover:scale-105
+                          h-20 md:h-25 md:px-8 lg:px-10 lg:h-32'
                           name='thirdButton'
                           onClick={() => { sendAnswer(2) }}
                           icon='square'
                       />
                       <Answer
-                          className={
-                          'flex items-center w-full bg-blue-600 p-32 justify-between rounded cursor-pointer scale duration-100 hover:scale-105 md:h-4/5 md:p-24'
-                          }
+                          className='flex items-center w-full bg-blue-600 px-3 justify-between rounded cursor-pointer scale duration-100 hover:scale-105
+                          h-20 md:h-25 md:px-8 lg:px-10 lg:h-32'
                           name='fourthButton'
                           onClick={() => { sendAnswer(3) }}
                           icon='diamond'

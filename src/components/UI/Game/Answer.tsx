@@ -14,10 +14,10 @@ interface Props {
 
 export const Answer = ({ onClick, Text, name, Disabled, className, icon }: Props) => {
   const iconComponent = {
-    circle: <Circle className='w-16' />,
-    square: <Square className='w-16' />,
-    triangle: <Triangle className='w-16' />,
-    diamond: <Diamond className='w-16' />
+    circle: <Circle className='w-10 md:w-12 lg:w-14 xl:w-16' />,
+    square: <Square className='w-10 md:w-12 lg:w-14 xl:w-16' />,
+    triangle: <Triangle className='w-10 md:w-12 lg:w-14 xl:w-16' />,
+    diamond: <Diamond className='w-10 md:w-12 lg:w-14 xl:w-16' />
   }
 
   return (

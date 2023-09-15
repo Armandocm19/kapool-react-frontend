@@ -12,7 +12,7 @@ export const HostScreen = () => {
     isGameStarted, leaderboard, startGame
   } = useHostGame()
   return (
-      <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-20 pb-20'}`}>
+      <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-5 pb-20 lg:pt-20'}`}>
         {!isGameStarted && (
             <>
               <Boton
@@ -27,20 +27,21 @@ export const HostScreen = () => {
           <Timer time={timer} />
         )}
         {isQuestionScreen && (
-          <>
-            <h1 className='text-white font-bold tracking-tight text-4xl px-3'>{ currentQuestion?.question }</h1>
+          <div className='w-full flex flex-col justify-center items-center content-center'>
+            <h1 className='text-white font-bold text-justify tracking-tight text-xl px-3 md:text-2xl lg:text-4xl'>{ currentQuestion?.question }</h1>
             {
               currentQuestion?.selectedImage && (
-                <ImageToGame styles='w-[18rem] max-w-[20rem]' url={currentQuestion.selectedImage.url} />
+                <ImageToGame styles='max-w-[20rem] mt-5 w-[10rem] sm:w-[12rem] md:w-[15rem] lg:w-[18rem]' url={currentQuestion.selectedImage.url} />
               )
             }
-            <div className='w-20 border border-white h-20 mt-10 rounded-full flex items-center justify-center'>
-              <h1 className='text-white font-bold text-4xl'>{timer}</h1>
+            <div className='w-10 border border-white h-10 mt-10 rounded-full flex items-center justify-center
+            md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-20 xl:h-20'>
+              <h1 className='text-white font-bold text-xl md:text-2xl lg:text-4xl'>{timer}</h1>
             </div>
-            <div className="w-9/12 grid grid-cols-2 gap-10 mt-7">
+            <div className="w-[95%] grid grid-cols-2 gap-10 mt-7 lg:w-8/12 xl:w-9/12">
               <ListAnswers host currentAnswerProps={currentAnswer} />
             </div>
-          </>
+          </div>
         )}
         {isLeaderboardScreen && (
           <>

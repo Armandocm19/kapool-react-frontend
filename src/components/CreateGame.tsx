@@ -11,6 +11,8 @@ import { Answer } from './UI/Game'
 import { SectionAnswers, SectionQuestions, SectionTime } from './Sections'
 import { ImageToGame } from './Sections/Game'
 import { ArrowLeft } from '../icons'
+import { validationQuestionData } from '../utils'
+import { toast } from 'sonner'
 
 export const CreatePage = () => {
   const {
@@ -40,6 +42,20 @@ export const CreatePage = () => {
         changeNumberQuestion(-(currentQuestionNumber - 1))
       }
     })
+  }
+
+  const onCompleteQuestion = () => {
+    const isValidateInputs = validationQuestionData(inputsValue, selectedCheckboxAnswers, timeForQuestion)
+    if (isValidateInputs.isAllEmpty) {
+      toast.error('Debes llenar los campos')
+      return
+    }
+    if (!isValidateInputs.isValid) {
+      toast.error(isValidateInputs.message)
+      return
+    }
+
+    handleNextQuestion(currentQuestionNumber)
   }
 
   return (
@@ -97,7 +113,7 @@ export const CreatePage = () => {
                 <Boton
                   className='w-auto scale bg-[#EF8354] text-[#242634] px-4 py-2  font-bold rounded mt-4 ease-in duration-100 hover:scale-110'
                   message='Completar pregunta'
-                  onClick={() => { handleNextQuestion(currentQuestionNumber) }}
+                  onClick={() => { onCompleteQuestion() }}
                   />
             </div>
 

@@ -12,3 +12,8 @@ export interface IGame {
 interface player {
   name: string
 }
+
+export interface IPlayer {
+  id: string
+  socketId: string
+}

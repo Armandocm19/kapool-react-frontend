@@ -1,24 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
-import { SocketContext } from '../../../context/Socket'
 import { UserIcon } from '../../../icons'
 import { Ring } from '@uiball/loaders'
+import { type IPlayer } from '../../../interfaces'
 
-interface IPlayer {
-  id: string
-  socketId: string
+interface Props {
+  playersList: IPlayer[]
 }
 
-export function Players () {
-  const { socket } = useContext(SocketContext)
-
-  const [playersList, setPlayersList] = useState<IPlayer[]>([])
-
-  useEffect(() => {
-    socket.on('player-joined', (player: any) => {
-      setPlayersList([...playersList, player])
-    })
-  }, [playersList, socket])
-
+export function Players ({ playersList }: Props) {
   return (
     <>
       {

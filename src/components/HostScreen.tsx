@@ -1,9 +1,16 @@
+import { useContext, useState, useEffect } from 'react'
+
 import { Players } from './Sections/ListPlayers'
+import { ImageToGame, Timer } from './Sections/Game'
+
 import { Boton } from './UI'
 import { ListAnswers, WinnerScreen } from './UI/Game'
 import { Loadboard } from './UI/Game/Loadboard'
+
 import { useHostGame } from '../hooks'
-import { ImageToGame, Timer } from './Sections/Game'
+import { SocketContext } from '../context/Socket'
+
+import { type IPlayer } from '../interfaces'
 
 export const HostScreen = () => {
   const {
@@ -11,16 +18,31 @@ export const HostScreen = () => {
     isPreviewScreen, isLeaderboardScreen, isQuestionScreen,
     isGameStarted, leaderboard, startGame
   } = useHostGame()
+
+  const { socket } = useContext(SocketContext)
+
+  const [playersList, setPlayersList] = useState<IPlayer[]>([])
+
+  useEffect(() => {
+    socket.on('player-joined', (player: any) => {
+      setPlayersList([...playersList, player])
+    })
+  }, [playersList, socket])
+
   return (
       <section className={`w-screen flex justify-center flex-col items-center ${!winnerScreen && 'pt-5 pb-20 lg:pt-20'}`}>
         {!isGameStarted && (
             <>
-              <Boton
-                onClick={startGame}
-                className='absolute top-0 right-0 w-64 scale bg-[#EF8354] p-2 text-[#242634] font-bold tracking-tigh rounded mt-6 mr-8 ease-in duration-100 hover:scale-110'
-                message='Iniciar juego'
-              />
-              <Players />
+              {
+                playersList.length !== 0 && (
+                  <Boton
+                    onClick={startGame}
+                    className='absolute top-0 right-0 w-64 scale bg-[#EF8354] p-2 text-[#242634] font-bold tracking-tigh rounded mt-6 mr-8 ease-in duration-100 hover:scale-110'
+                    message='Iniciar juego'
+                  />
+                )
+              }
+              <Players playersList={playersList} />
             </>
         )}
         {isPreviewScreen && (

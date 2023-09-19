@@ -4,7 +4,7 @@ export const Home = () => {
   return (
         <>
           <Navbar />
-          <section className='flex justify-center w-6/12 '>
+          <section className='flex justify-center w-full'>
           <div className="flex items-center flex-col">
             <WelcomeTitle />
           </div>

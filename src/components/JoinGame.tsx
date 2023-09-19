@@ -8,13 +8,13 @@ export const JoinGame = () => {
   } = useJoinGame()
 
   return (
-        <form className='flex justify-center w-6/12' onSubmit={handleSubmit}>
+        <form className='flex justify-center w-full lg:w-6/12' onSubmit={handleSubmit}>
            <BackTo text='Volver al menú principal' to='/' />
         {
           !showWaitingScreen
             ? (
             <div className="flex items-center flex-col">
-            <h1 className='text-white font-bold tracking-tight text-5xl'>{!dataFromServer.code ? 'Ingresa el código' : 'Ingresa tu nombre'}</h1>
+            <h1 className='text-white font-bold tracking-tight text-2xl md:text-3xl lg:text-5xl'>{!dataFromServer.code ? 'Ingresa el código' : 'Ingresa tu nombre'}</h1>
             <Input
                 className='outline-0 w-64 font-bold tracking-tight shadow bg-zinc-800 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 mt-8 focus:shadow-zinc-500 ease-in duration-100'
                 type='text'
@@ -41,7 +41,7 @@ export const JoinGame = () => {
               )
             : (
             <div className="flex items-center flex-col">
-              <h1 className='text-white font-bold tracking-tight text-5xl'>Esperando a que el juego inicie...</h1>
+              <h1 className='text-white font-bold tracking-tight text-xl md:text-3xl lg:text-5xl'>Esperando a que el juego inicie...</h1>
             </div>
               )
         }

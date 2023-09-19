@@ -31,7 +31,7 @@ export function Players ({ playersList }: Props) {
             )
           : (
             <>
-              <h1 className='text-5xl font-bold tracking-tigh text-white'>Esperando jugadores...</h1>
+              <h1 className='text-2xl font-bold tracking-tigh text-white md:text-3xl lg:text-5xl'>Esperando jugadores...</h1>
               <div className="mt-10">
                 <Ring
                   size={40}

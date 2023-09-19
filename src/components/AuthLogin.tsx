@@ -21,27 +21,27 @@ export const AuthLogin = () => {
             >
             {
                 (formik) => (
-                    <Form noValidate className='flex flex-col justify-center w-6/12 items-center'>
-                        <h1 className='text-5xl font-bold tracking-tight text-white'>Inicia sesión</h1>
+                    <Form noValidate className='flex flex-col justify-center w-full items-center md:w-6/12'>
+                        <h1 className='text-2xl font-bold tracking-tight text-white md:text-3xl lg:text-5xl'>Inicia sesión</h1>
                         <InputForm
                             type='text'
                             name='username'
-                            className='outline-0 font-bold tracking-tight shadow w-6/12 bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4
-                            text-zinc-500 mt-8 focus:shadow-zinc-500 ease-in duration-100'
+                            className='outline-0 font-bold tracking-tight shadow w-[80%] bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4
+                            text-zinc-500 mt-8 focus:shadow-zinc-500 ease-in duration-100 lg:w-6/12'
                             placeholder='Nombre de usuario'
                         />
                         <InputForm
                             type='password'
                             name='password'
-                            className='outline-0 font-bold tracking-tight shadow w-6/12 bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4
-                            text-zinc-500 mt-5 focus:shadow-zinc-500 ease-in duration-100'
+                            className='outline-0 font-bold tracking-tight shadow w-[80%] bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4
+                            text-zinc-500 mt-5 focus:shadow-zinc-500 ease-in duration-100 lg:w-6/12'
                             placeholder='Contraseña'
                         />
 
                         <Boton
                             type='submit'
                             message='Ingresar'
-                            className='w-72 font-bold tracking-tight scale bg-[#EF8354] p-2 text-[#242634] rounded mt-4 ease-in duration-100 hover:scale-110'
+                            className='w-60 font-bold tracking-tight scale bg-[#EF8354] p-2 text-[#242634] rounded mt-4 ease-in duration-100 hover:scale-110 lg:w-72'
                         />
                     </Form>
                 )

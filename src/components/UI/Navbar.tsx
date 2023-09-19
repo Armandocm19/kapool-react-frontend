@@ -4,11 +4,11 @@ import { useState } from 'react'
 
 export const Navbar = () => {
   const [userName, setUserName] = useState(localStorage.getItem('name'))
-  const [isToggle, setIsToggle] = useState(false)
+  const [isToggleUI, setIsToggleUI] = useState(false)
 
   return (
-    <nav className="w-3/4 absolute top-4 bg-black/40 shadow-sm rounded">
-      <div className="w-full flex flex-wrap gap-5 items-center justify-between mx-auto p-4 md:flex-nowrap">
+    <nav className="w-3/4 absolute top-4 bg-black/40 shadow-sm rounded backdrop-blur-lg">
+      <div className={`w-full flex flex-wrap items-center ${userName ? 'justify-between gap-5 md:flex-nowrap' : 'justify-center'} mx-auto p-4`}>
         {userName && (
           <div className="flex gap-1 items-center font-bold md:gap-2">
             <FaUserCircle className="text-slate-50" />
@@ -20,9 +20,10 @@ export const Navbar = () => {
           data-collapse-toggle="navbar-default"
           type="button"
           onClick={() => {
-            setIsToggle(!isToggle)
+            setIsToggleUI(!isToggleUI)
           }}
-          className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-zinc-900 dark:focus:ring-gray-600"
+          className={`${userName ? 'inline-flex' : 'hidden'} items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2
+          focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-zinc-900 dark:focus:ring-gray-600`}
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -44,7 +45,7 @@ export const Navbar = () => {
           </svg>
         </button>
         <div
-          className={`${!isToggle && 'hidden'} w-full md:w-[80%] md:block`}
+          className={`${!isToggleUI && 'hidden'} w-full md:w-[80%] md:block`}
           id="navbar-default"
         >
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg bg-black/40 md:bg-transparent md:flex-row md:justify-evenly md:space-x-8 md:mt-0 md:border-0">
@@ -67,8 +68,8 @@ export const Navbar = () => {
               )}
             </li>
             <li>
-              {userName
-                ? (
+              {userName &&
+                (
                 <p
                   onClick={() => {
                     localStorage.removeItem('name')
@@ -78,21 +79,26 @@ export const Navbar = () => {
                 >
                   Cerrar sesión
                 </p>
-                  )
-                : (
-                <NavLink
+                )
+                }
+            </li>
+          </ul>
+        </div>
+        {
+          !userName && (
+            <div className="w-screen flex justify-center items-center">
+               <NavLink
                   to="/login"
-                  className="flex hover:cursor-pointer font-bold tracking-tight"
+                  className="flex hover:cursor-pointer font-bold text-slate-50 tracking-tight text-xs sm:text-sm md:text-base"
                 >
-                  <span className="scale block py-2 pl-3 pr-4 duration-100 hover:scale-110 underline text-sm lg:text-base md:p-0">
+                  <span className="scale block duration-100 hover:scale-110 underline">
                     Iniciar sesión
                   </span>{' '}
                   &nbsp; para crear una partida
                 </NavLink>
-                  )}
-            </li>
-          </ul>
-        </div>
+            </div>
+          )
+        }
       </div>
     </nav>
   )

@@ -103,52 +103,54 @@ export const CreatePage = () => {
             onClick={handleToggleUI}
           />
         </div>
-        <form
-          className="flex flex-col justify-center items-center overflow-y-auto pt-10 w-full"
-          noValidate
-          autoComplete="off"
-        >
-          <SectionQuestions
-            questionNumberState={currentQuestionNumber}
-            onchangeData={handleInputChange}
-            question={inputsValue.question}
-            handleFileSelection={handleFileSelection}
-            fileInputRef={fileInputRef}
-            selectedImage={selectedImage}
-            handleImageRemoval={handleImageRemoval}
-          />
+        <div className='relative w-full overflow-y-auto'>
+          <form
+            className="flex flex-col justify-center items-center pt-10 w-full"
+            noValidate
+            autoComplete="off"
+          >
+            <SectionQuestions
+              questionNumberState={currentQuestionNumber}
+              onchangeData={handleInputChange}
+              question={inputsValue.question}
+              handleFileSelection={handleFileSelection}
+              fileInputRef={fileInputRef}
+              selectedImage={selectedImage}
+              handleImageRemoval={handleImageRemoval}
+            />
 
-          <SectionAnswers
-            onChangeData={handleInputChange}
-            handleCheckboxChange={handleCheckboxChange}
-            selectedCheckboxAnswers={selectedCheckboxAnswers}
-            inputsValue={inputsValue}
-          />
+            <SectionAnswers
+              onChangeData={handleInputChange}
+              handleCheckboxChange={handleCheckboxChange}
+              selectedCheckboxAnswers={selectedCheckboxAnswers}
+              inputsValue={inputsValue}
+            />
 
-          <SectionTime
-            handleTimeChange={handleTimeChange}
-            timeForQuestion={timeForQuestion}
-          />
+            <SectionTime
+              handleTimeChange={handleTimeChange}
+              timeForQuestion={timeForQuestion}
+            />
 
-          <div className="flex flex-col gap-5 mt-7 xl:flex-row">
-            {currentQuestionNumber !== 1 && (
+            <div className="flex flex-col gap-5 mt-7 xl:flex-row">
+              {currentQuestionNumber !== 1 && (
+                <Boton
+                  className="w-auto scale bg-[#f8f8f8] text-[#242634] px-4 py-2 font-bold rounded mt-0 ease-in duration-100 hover:scale-110 xl:mt-4"
+                  message="Anterior pregunta"
+                  onClick={() => {
+                    handlePreviousQuestion(currentQuestionNumber - 1)
+                  }}
+                />
+              )}
               <Boton
-                className="w-auto scale bg-[#f8f8f8] text-[#242634] px-4 py-2 font-bold rounded mt-0 ease-in duration-100 hover:scale-110 xl:mt-4"
-                message="Anterior pregunta"
+                className="w-auto scale bg-[#EF8354] text-[#242634] px-4 py-2  font-bold rounded mt-0 ease-in duration-100 hover:scale-110 xl:mt-4"
+                message="Completar pregunta"
                 onClick={() => {
-                  handlePreviousQuestion(currentQuestionNumber - 1)
+                  onCompleteQuestion()
                 }}
               />
-            )}
-            <Boton
-              className="w-auto scale bg-[#EF8354] text-[#242634] px-4 py-2  font-bold rounded mt-0 ease-in duration-100 hover:scale-110 xl:mt-4"
-              message="Completar pregunta"
-              onClick={() => {
-                onCompleteQuestion()
-              }}
-            />
-          </div>
-        </form>
+            </div>
+          </form>
+        </div>
       </section>
 
       <section className="absolute z-0 right-0 h-full w-full flex flex-col justify-center items-center gap-8 px-0 xl:w-[70%] xl:z-10">

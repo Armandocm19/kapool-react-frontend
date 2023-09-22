@@ -19,12 +19,12 @@ interface Props {
 export const SectionQuestions = ({ questionNumberState, onchangeData, question, handleFileSelection, fileInputRef, selectedImage, handleImageRemoval }: Props) => {
   return (
     <>
-      <h1 className="text-white text-4xl font-bold tracking-tight">
+      <h1 className="text-white text-base font-bold tracking-tight md:text-xl xl:text-4xl">
         {`PREGUNTA NUMERO ${questionNumberState}`}
       </h1>
       {selectedImage
         ? (
-        <div className="relative flex w-36 max-w-[10rem] mt-5">
+        <div className="relative flex w-[90%] mt-5 md:w-36 lg:max-w-[10rem]">
           <picture>
             <img src={selectedImage.url} alt="imagen para la pregunta" />
           </picture>
@@ -58,7 +58,7 @@ export const SectionQuestions = ({ questionNumberState, onchangeData, question, 
         name="question"
         onChange={onchangeData}
         value={question}
-        className="outline-0 font-bold tracking-tight shadow w-[80%] bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 mt-5 focus:shadow-zinc-500 ease-in duration-100"
+        className="outline-0 font-bold tracking-tight p-2 shadow w-[80%] bg-[#4F5D75]/30 h-10 rounded placeholder:text-zinc-500 pl-4 text-zinc-500 mt-5 focus:shadow-zinc-500 ease-in duration-100"
         placeholder="Escribe tu pregunta..."
       />
     </>

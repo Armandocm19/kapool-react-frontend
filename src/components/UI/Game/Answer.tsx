@@ -30,7 +30,7 @@ export const Answer = ({ onClick, Text, name, Disabled, className, icon }: Props
             {iconComponent[icon]}
             {
               Text && (
-                <p className='text-white text-2xl font-bold tracking-tight'>{Text}</p>
+                <p className='text-white text-base font-bold tracking-tight md:text-xl lg:text-2xl'>{Text}</p>
               )
             }
         </button>

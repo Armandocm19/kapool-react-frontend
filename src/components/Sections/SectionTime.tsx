@@ -7,7 +7,7 @@ interface Props {
 
 export const SectionTime = ({ handleTimeChange, timeForQuestion }: Props) => {
   return (
-    <div className="flex items-center gap-3 mt-5">
+    <div className="flex flex-col items-center gap-3 mt-5 xl:flex-row">
       <label className='text-white font-bold tracking-tight'>Tiempo para responder:</label>
       <Input
         type="number"

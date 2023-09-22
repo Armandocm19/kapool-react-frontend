@@ -11,10 +11,10 @@ interface Props {
 export const SectionAnswers = ({ onChangeData, handleCheckboxChange, inputsValue, selectedCheckboxAnswers }: Props) => {
   return (
         <>
-          <h2 className='text-white text-2xl mt-8 font-bold tracking-tight'
+          <h2 className='text-white text-base mt-8 text-center font-bold tracking-tight md:text-xl xl:text-2xl'
           >Coloca tus 4 posibles respuestas
           </h2>
-          <p className='text-zinc-500 font-bold tracking-tight'>La respuesta correcta debe ser marcada en la casilla</p>
+          <p className='text-zinc-500 font-bold text-center tracking-tight text-sm xl:text-base'>La respuesta correcta debe ser marcada en la casilla</p>
 
           <div className="w-[80%] flex flex-col gap-7 mt-7">
 

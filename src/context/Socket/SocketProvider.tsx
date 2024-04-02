@@ -8,8 +8,9 @@ interface Props {
 }
 
 const backendURL = String(import.meta.env.VITE_BACKEND_URL)
-const socket = io(backendURL.substring(38, 0)) // Con el substring recorto el path por defecto de la url
-
+const socket = io(backendURL.substring(45, 0))
+// const socket = io(backendURL.substring(38, 0)) // Con el substring recorto el path por defecto de la url
+console.log(backendURL.substring(45, 0))
 export const SocketProvider: FC<Props> = ({ children }) => {
   const [hostId, setHostId] = useState('')
 
